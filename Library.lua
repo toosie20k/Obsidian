@@ -195,24 +195,24 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 6,
+    CornerRadius = 4,
 
     IsLightTheme = false,
     Scheme = {
-    -- Modern Electric Cyan aesthetic
+    -- Obsidian Onyx aesthetic (Creative Redesign)
     BackgroundColor = Color3.fromRGB(13, 13, 15),
-    MainColor = Color3.fromRGB(20, 20, 22),
-    AccentColor = Color3.fromRGB(0, 255, 255),
-    OutlineColor = Color3.fromRGB(35, 35, 38),
-    FontColor = Color3.fromRGB(240, 240, 240),
-    Font = Font.fromEnum(Enum.Font.GothamMedium),
+    MainColor = Color3.fromRGB(18, 18, 20),
+    AccentColor = Color3.fromRGB(140, 120, 255),
+    OutlineColor = Color3.fromRGB(28, 28, 32),
+    FontColor = Color3.fromRGB(235, 235, 245),
+    Font = Font.fromEnum(Enum.Font.Ubuntu),
 
     RedColor = Color3.fromRGB(255, 65, 95),
     DarkColor = Color3.fromRGB(0, 0, 0),
     WhiteColor = Color3.fromRGB(255, 255, 255),
 
     SidebarColor = Color3.fromRGB(13, 13, 15),
-    AccentGlow = Color3.fromRGB(0, 255, 255),
+    AccentGlow = Color3.fromRGB(140, 120, 255),
 },
 
     Registry = {},
@@ -295,10 +295,10 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 6,
+        CornerRadius = 4,
         NotifySide = "Right",
         ShowCustomCursor = true,
-        Font = Enum.Font.GothamMedium,
+        Font = Enum.Font.Ubuntu,
         ToggleKeybind = Enum.KeyCode.RightControl,
         MobileButtonsSide = "Left",
         UnlockMouseWhileOpen = true,
