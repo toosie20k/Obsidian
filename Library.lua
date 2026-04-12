@@ -170,8 +170,8 @@ local Library = {
     ActiveDialog = nil,
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -195,14 +195,14 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 16,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
-    BackgroundColor = Color3.fromRGB(15, 15, 20),
-    MainColor = Color3.fromRGB(22, 22, 30),
-    AccentColor = Color3.fromRGB(140, 110, 255),
-    OutlineColor = Color3.fromRGB(60, 60, 80),
+    BackgroundColor = Color3.fromRGB(10, 10, 14),
+    MainColor = Color3.fromRGB(18, 18, 24),
+    AccentColor = Color3.fromRGB(124, 92, 255),
+    OutlineColor = Color3.fromRGB(40, 40, 55),
     FontColor = Color3.fromRGB(235, 235, 245),
     Font = Font.fromEnum(Enum.Font.Gotham),
 
@@ -239,7 +239,7 @@ local Templates = {
         BorderSizePixel = 0,
     },
     ImageLabel = {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         BorderSizePixel = 0,
     },
     ImageButton = {
@@ -1131,7 +1131,7 @@ ScreenGui.DescendantRemoving:Connect(function(Instance)
 end)
 
 local ModalElement = New("TextButton", {
-    BackgroundTransparency = 1,
+    BackgroundTransparency = 0.2,
     Modal = false,
     Size = UDim2.fromScale(0, 0),
     AnchorPoint = Vector2.zero,
@@ -1179,7 +1179,7 @@ do
 
     CursorCustomImage = New("ImageLabel", {
         AnchorPoint = Vector2.new(0.5, 0.5),
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Position = UDim2.fromScale(0.5, 0.5),
         Size = UDim2.fromOffset(20, 20),
         ZIndex = 11000,
@@ -1194,7 +1194,7 @@ local NotificationList
 do
     NotificationArea = New("Frame", {
         AnchorPoint = Vector2.new(1, 0),
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Position = UDim2.new(1, -6, 0, 6),
         Size = UDim2.new(0, 300, 1, -6),
         Parent = ScreenGui,
@@ -1456,7 +1456,7 @@ end
 
 function Library:AddBlank(Frame: GuiObject, Size: UDim2)
     return New("Frame", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Size = Size or UDim2.fromScale(0, 0),
         Parent = Frame,
     })
@@ -1548,7 +1548,7 @@ function Library:AddDraggableButton(Text: string, Func, ExcludeScaling: boolean?
     local Button = New("TextButton", {
         BackgroundColor3 = "BackgroundColor",
         Position = UDim2.fromOffset(6, 6),
-        TextSize = 16,
+        TextSize = 14,
         ZIndex = 10,
         Parent = ScreenGui,
     })
@@ -1611,7 +1611,7 @@ function Library:AddDraggableMenu(Name: string)
     })
 
     local Label = New("TextLabel", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Size = UDim2.new(1, 0, 0, 34),
         Text = Name,
         TextSize = 15,
@@ -1625,7 +1625,7 @@ function Library:AddDraggableMenu(Name: string)
     })
 
     local Container = New("Frame", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Position = UDim2.fromOffset(0, 35),
         Size = UDim2.new(1, 0, 1, -35),
         Parent = Holder,
@@ -2172,7 +2172,7 @@ do
         local KeybindsToggle = { Normal = KeyPicker.Mode ~= "Toggle" }
         do
             local Holder = New("TextButton", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 16),
                 Text = "",
                 Visible = not Info.NoUI,
@@ -2181,11 +2181,11 @@ do
 
             local Label = New("TextLabel", {
                 AutomaticSize = Enum.AutomaticSize.X,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(0, 1),
                 Text = "",
                 TextSize = 14,
-                TextTransparency = 0.5,
+                TextTransparency = 0.3,
                 Parent = Holder,
             })
 
@@ -2266,11 +2266,11 @@ do
 
             local Button = New("TextButton", {
                 BackgroundColor3 = "MainColor",
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 21),
                 Text = Mode,
                 TextSize = 14,
-                TextTransparency = 0.5,
+                TextTransparency = 0.3,
                 Parent = MenuTable.Menu,
             })
 
@@ -2291,7 +2291,7 @@ do
                 KeyPicker.Mode = nil
 
                 Button.BackgroundTransparency = 1
-                Button.TextTransparency = 0.5
+                Button.TextTransparency = 0.3
             end
 
             Button.MouseButton1Click:Connect(function()
@@ -2691,7 +2691,7 @@ do
 
         if typeof(ColorPicker.Title) == "string" then
             New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 8),
                 Text = ColorPicker.Title,
                 TextSize = 14,
@@ -2701,7 +2701,7 @@ do
         end
 
         local ColorHolder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 200),
             Parent = ColorMenu.Menu,
         })
@@ -2793,7 +2793,7 @@ do
         end
 
         local InfoHolder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 20),
             Parent = ColorMenu.Menu,
         })
@@ -2834,7 +2834,7 @@ do
         do
             local function CreateButton(Text, Func)
                 local Button = New("TextButton", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Size = UDim2.new(1, 0, 0, 21),
                     Text = Text,
                     TextSize = 14,
@@ -3061,13 +3061,13 @@ do
         local Container = Groupbox.Container
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 6 + MarginTop + MarginBottom),
             Parent = Container,
         })
 
         local InnerHolder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 1, 0),
             Parent = Holder,
         })
@@ -3081,11 +3081,11 @@ do
         if Text then
             local TextLabel = New("TextLabel", {
                 AutomaticSize = Enum.AutomaticSize.X,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 0),
                 Text = Text,
                 TextSize = 14,
-                TextTransparency = 0.5,
+                TextTransparency = 0.3,
                 TextXAlignment = Enum.TextXAlignment.Center,
                 Parent = InnerHolder,
             })
@@ -3168,7 +3168,7 @@ do
         }
 
         local TextLabel = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 18),
             Text = Label.Text,
             TextSize = Data.Size,
@@ -3304,7 +3304,7 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 21),
             Parent = Container,
         })
@@ -3568,7 +3568,7 @@ do
 
         local Button = New("TextButton", {
             Active = not Toggle.Disabled,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 18),
             Text = "",
             Visible = Toggle.Visible,
@@ -3576,7 +3576,7 @@ do
         })
 
         local Label = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Position = UDim2.fromOffset(26, 0),
             Size = UDim2.new(1, -26, 1, 0),
             Text = Toggle.Text,
@@ -3771,7 +3771,7 @@ do
 
         local Button = New("TextButton", {
             Active = not Toggle.Disabled,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 18),
             Text = "",
             Visible = Toggle.Visible,
@@ -3779,7 +3779,7 @@ do
         })
 
         local Label = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, -40, 1, 0),
             Text = Toggle.Text,
             TextSize = 14,
@@ -3993,14 +3993,14 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 39),
             Visible = Input.Visible,
             Parent = Container,
         })
 
         local Label = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 14),
             Text = Input.Text,
             TextSize = 14,
@@ -4158,7 +4158,7 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Info.Compact and 13 or 31),
             Visible = Slider.Visible,
             Parent = Container,
@@ -4167,7 +4167,7 @@ do
         local SliderLabel
         if not Info.Compact then
             SliderLabel = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 14),
                 Text = Slider.Text,
                 TextSize = 14,
@@ -4189,7 +4189,7 @@ do
         })
 
         local DisplayLabel = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Text = "",
             TextSize = 14,
@@ -4421,14 +4421,14 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Dropdown.Text and 39 or 21),
             Visible = Dropdown.Visible,
             Parent = Container,
         })
 
         local Label = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 14),
             Text = Dropdown.Text,
             TextSize = 14,
@@ -4472,7 +4472,7 @@ do
         local SearchBox
         if Info.Searchable then
             SearchBox = New("TextBox", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 PlaceholderText = "Search...",
                 Position = UDim2.fromOffset(-8, 0),
                 Size = UDim2.new(1, -12, 1, 0),
@@ -4597,12 +4597,12 @@ do
 
                 local Button = New("TextButton", {
                     BackgroundColor3 = "MainColor",
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     LayoutOrder = IsDisabled and 1 or 0,
                     Size = UDim2.new(1, 0, 0, 21),
                     Text = tostring(Value),
                     TextSize = 14,
-                    TextTransparency = 0.5,
+                    TextTransparency = 0.3,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     Parent = MenuTable.Menu,
                 })
@@ -4886,7 +4886,7 @@ do
         end
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Info.Height),
             Visible = Viewport.Visible,
             Parent = Container,
@@ -4911,7 +4911,7 @@ do
         })
 
         local ViewportFrame = New("ViewportFrame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Parent = Box,
             CurrentCamera = Viewport.Camera,
@@ -5123,7 +5123,7 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Info.Height),
             Visible = Image.Visible,
             Parent = Container,
@@ -5149,7 +5149,7 @@ do
         })
 
         local ImageProperties = {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Image = Image.Image,
             ImageTransparency = Image.Transparency,
@@ -5265,7 +5265,7 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Info.Height),
             Visible = Video.Visible,
             Parent = Container,
@@ -5290,7 +5290,7 @@ do
         })
 
         local VideoFrameInstance = New("VideoFrame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Video = Video.Video,
             Looped = Video.Looped,
@@ -5386,7 +5386,7 @@ do
         }
 
         local Holder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, Info.Height),
             Visible = Passthrough.Visible,
             Parent = Container,
@@ -5443,7 +5443,7 @@ do
 
         do
             DepboxContainer = New("Frame", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 1),
                 Visible = false,
                 Parent = Container,
@@ -5707,7 +5707,7 @@ function Library:Notify(...)
 
     local FakeBackground = New("Frame", {
         AutomaticSize = Enum.AutomaticSize.Y,
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Size = UDim2.fromScale(1, 0),
         Visible = false,
         Parent = NotificationArea,
@@ -5739,7 +5739,7 @@ function Library:Notify(...)
     Library:AddOutline(Holder)
 
     local ContentContainer = New("Frame", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         AutomaticSize = Enum.AutomaticSize.XY,
         Size = UDim2.fromScale(1, 0),
         Parent = Holder,
@@ -5759,7 +5759,7 @@ function Library:Notify(...)
         local ParsedIcon = Library:GetCustomIcon(Data.BigIcon)
         if ParsedIcon then
             BigIconLabel = New("ImageLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromOffset(24, 24),
                 Image = ParsedIcon.Url,
                 ImageColor3 = Data.IconColor or "AccentColor",
@@ -5771,7 +5771,7 @@ function Library:Notify(...)
     end
 
     local TextContainer = New("Frame", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         AutomaticSize = Enum.AutomaticSize.XY,
         Size = UDim2.fromScale(0, 0),
         Parent = ContentContainer,
@@ -5784,7 +5784,7 @@ function Library:Notify(...)
     local TitleContainer
     if Data.Title then
         TitleContainer = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(0, 0),
             Parent = TextContainer,
         })
@@ -5795,7 +5795,7 @@ function Library:Notify(...)
         local ParsedIcon = Library:GetCustomIcon(Data.Icon)
         if ParsedIcon then
             IconLabel = New("ImageLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 AnchorPoint = Vector2.new(0, 0.5),
                 Position = UDim2.new(0, 0, 0.5, 1),
                 Size = UDim2.fromOffset(15, 15),
@@ -5818,7 +5818,7 @@ function Library:Notify(...)
     if Data.Title then
         Title = New("TextLabel", {
             AutomaticSize = Enum.AutomaticSize.None,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             AnchorPoint = Vector2.new(0, 0.5),
             Position = UDim2.new(0, (Data.Icon and 21 or 0), 0.5, 0),
             Size = UDim2.fromScale(0, 0),
@@ -5834,7 +5834,7 @@ function Library:Notify(...)
     if Data.Description then
         Desc = New("TextLabel", {
             AutomaticSize = Enum.AutomaticSize.None,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(0, 0),
             Text = Data.Description,
             TextSize = 14,
@@ -5915,7 +5915,7 @@ function Library:Notify(...)
     Data:Resize()
 
     local TimerHolder = New("Frame", {
-        BackgroundTransparency = 1,
+        BackgroundTransparency = 0.2,
         Size = UDim2.new(1, 0, 0, 7),
         Visible = (Data.Persist ~= true and typeof(Data.Time) ~= "Instance") or typeof(Data.Steps) == "number",
         Parent = Holder,
@@ -6094,7 +6094,7 @@ function Library:CreateWindow(WindowInfo)
                 Size = UDim2.fromScale(1, 1),
                 ScaleType = Enum.ScaleType.Stretch,
                 ZIndex = 999,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 ImageTransparency = 0.75,
                 Parent = MainFrame,
             })
@@ -6111,7 +6111,7 @@ function Library:CreateWindow(WindowInfo)
 
         --// Top Bar \\-
         local TopBar = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 48),
             Parent = MainFrame,
         })
@@ -6119,7 +6119,7 @@ function Library:CreateWindow(WindowInfo)
 
         --// Title
         TitleHolder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(0, InitialLeftWidth, 1, 0),
             Parent = TopBar,
         })
@@ -6141,7 +6141,7 @@ function Library:CreateWindow(WindowInfo)
             })
         else
             WindowIcon = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = WindowInfo.IconSize,
                 Text = WindowInfo.Title:sub(1, 1),
                 TextScaled = true,
@@ -6157,7 +6157,7 @@ function Library:CreateWindow(WindowInfo)
             TitleHolder.AbsoluteSize.X - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0) - 12
         )
         WindowTitle = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(0, X, 1, 0),
             Text = WindowInfo.Title,
             TextSize = 20,
@@ -6167,7 +6167,7 @@ function Library:CreateWindow(WindowInfo)
         --// Top Right Bar
         RightWrapper = New("Frame", {
             AnchorPoint = Vector2.new(1, 0.5),
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Position = UDim2.new(1, -49, 0.5, 0),
             Size = UDim2.new(1, -InitialLeftWidth - 57 - 1, 1, -16),
             Parent = TopBar,
@@ -6184,7 +6184,7 @@ function Library:CreateWindow(WindowInfo)
         CurrentTabInfo = New("Frame", {
             Size = UDim2.fromScale(WindowInfo.DisableSearch and 1 or 0.5, 1),
             Visible = false,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Parent = RightWrapper,
         })
 
@@ -6209,7 +6209,7 @@ function Library:CreateWindow(WindowInfo)
         })
 
         CurrentTabLabel = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             Text = "",
@@ -6219,14 +6219,14 @@ function Library:CreateWindow(WindowInfo)
         })
 
         CurrentTabDescription = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             Text = "",
             TextWrapped = true,
             TextSize = 14,
             TextXAlignment = Enum.TextXAlignment.Left,
-            TextTransparency = 0.5,
+            TextTransparency = 0.3,
             Parent = CurrentTabInfo,
         })
 
@@ -6304,7 +6304,7 @@ function Library:CreateWindow(WindowInfo)
 
         local BottomBar = New("Frame", {
             AnchorPoint = Vector2.new(0, 1),
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Position = UDim2.fromScale(0, 1),
             Size = UDim2.new(1, 0, 0, 20),
             Parent = MainFrame,
@@ -6316,11 +6316,11 @@ function Library:CreateWindow(WindowInfo)
 
         --// Footer
         New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Text = WindowInfo.Footer,
             TextSize = 14,
-            TextTransparency = 0.5,
+            TextTransparency = 0.3,
             Parent = BottomBar,
         })
 
@@ -6328,7 +6328,7 @@ function Library:CreateWindow(WindowInfo)
         if WindowInfo.Resizable then
             ResizeButton = New("TextButton", {
                 AnchorPoint = Vector2.new(1, 0),
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Position = UDim2.new(1, -WindowInfo.CornerRadius / 4, 0, 0),
                 Size = UDim2.fromScale(1, 1),
                 SizeConstraint = Enum.SizeConstraint.RelativeYY,
@@ -6512,7 +6512,7 @@ function Library:CreateWindow(WindowInfo)
         do
             TabButton = New("TextButton", {
                 BackgroundColor3 = "MainColor",
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 40),
                 Text = "",
                 Parent = Tabs,
@@ -6523,18 +6523,20 @@ function Library:CreateWindow(WindowInfo)
                 PaddingRight = UDim.new(0, IsCompact and 6 or 12),
                 PaddingTop = UDim.new(0, IsCompact and 6 or 11),
                 Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
             })
 
             TabLabel = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Position = UDim2.fromOffset(30, 0),
                 Size = UDim2.new(1, -30, 1, 0),
                 Text = Name,
-                TextSize = 16,
-                TextTransparency = 0.5,
+                TextSize = 14,
+                TextTransparency = 0.3,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 Visible = not IsCompact,
                 Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
             })
 
             if Icon then
@@ -6548,6 +6550,7 @@ function Library:CreateWindow(WindowInfo)
                     Size = UDim2.fromScale(1, 1),
                     SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
                     Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
                 })
             end
 
@@ -6559,7 +6562,7 @@ function Library:CreateWindow(WindowInfo)
 
             --// Tab Container \\--
             TabContainer = New("Frame", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 1),
                 Visible = false,
                 Parent = Container,
@@ -6567,7 +6570,7 @@ function Library:CreateWindow(WindowInfo)
 
             TabLeft = New("ScrollingFrame", {
                 AutomaticCanvasSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 CanvasSize = UDim2.fromScale(0, 0),
                 ScrollBarImageTransparency = 1,
                 ScrollBarThickness = 0,
@@ -6587,12 +6590,12 @@ function Library:CreateWindow(WindowInfo)
             })
             do
                 New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     LayoutOrder = -1,
                     Parent = TabLeft,
                 })
                 New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     LayoutOrder = 1,
                     Parent = TabLeft,
                 })
@@ -6601,7 +6604,7 @@ function Library:CreateWindow(WindowInfo)
             TabRight = New("ScrollingFrame", {
                 AnchorPoint = Vector2.new(1, 0),
                 AutomaticCanvasSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 CanvasSize = UDim2.fromScale(0, 0),
                 Position = UDim2.fromScale(1, 0),
                 ScrollBarImageTransparency = 1,
@@ -6622,12 +6625,12 @@ function Library:CreateWindow(WindowInfo)
             })
             do
                 New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     LayoutOrder = -1,
                     Parent = TabRight,
                 })
                 New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     LayoutOrder = 1,
                     Parent = TabRight,
                 })
@@ -6637,7 +6640,7 @@ function Library:CreateWindow(WindowInfo)
         --// Warning Box \\--
         local WarningBoxHolder = New("Frame", {
             AutomaticSize = Enum.AutomaticSize.Y,
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Position = UDim2.fromOffset(0, 7),
             Size = UDim2.fromScale(1, 0),
             Visible = false,
@@ -6665,7 +6668,7 @@ function Library:CreateWindow(WindowInfo)
             WarningBoxOutline, WarningBoxShadowOutline = Library:AddOutline(WarningBox)
 
             WarningBoxScrollingFrame = New("ScrollingFrame", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 BorderSizePixel = 0,
                 Size = UDim2.fromScale(1, 1),
                 CanvasSize = UDim2.new(0, 0, 0, 0),
@@ -6682,7 +6685,7 @@ function Library:CreateWindow(WindowInfo)
             })
 
             WarningTitle = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, -4, 0, 14),
                 Text = "",
                 TextColor3 = Color3.fromRGB(255, 50, 50),
@@ -6699,7 +6702,7 @@ function Library:CreateWindow(WindowInfo)
             })
 
             WarningText = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Position = UDim2.fromOffset(0, 16),
                 Size = UDim2.new(1, -4, 0, 0),
                 Text = "",
@@ -6844,7 +6847,7 @@ function Library:CreateWindow(WindowInfo)
         function Tab:AddGroupbox(Info)
             local BoxHolder = New("Frame", {
                 AutomaticSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 0),
                 Parent = Info.Side == 1 and TabLeft or TabRight,
             })
@@ -6895,7 +6898,7 @@ function Library:CreateWindow(WindowInfo)
                 end
 
                 GroupboxLabel = New("TextLabel", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Position = UDim2.fromOffset(BoxIcon and 24 or 0, 0),
                     Size = UDim2.new(1, 0, 0, 34),
                     Text = Info.Name,
@@ -6910,7 +6913,7 @@ function Library:CreateWindow(WindowInfo)
                 })
 
                 GroupboxContainer = New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Position = UDim2.fromOffset(0, 35),
                     Size = UDim2.new(1, 0, 1, -35),
                     Parent = GroupboxHolder,
@@ -6962,7 +6965,7 @@ function Library:CreateWindow(WindowInfo)
         function Tab:AddTabbox(Info)
             local BoxHolder = New("Frame", {
                 AutomaticSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 0),
                 Parent = Info.Side == 1 and TabLeft or TabRight,
             })
@@ -6992,7 +6995,7 @@ function Library:CreateWindow(WindowInfo)
                 Library:AddOutline(TabboxHolder)
 
                 TabboxButtons = New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Size = UDim2.new(1, 0, 0, 34),
                     Parent = TabboxHolder,
                 })
@@ -7025,7 +7028,7 @@ function Library:CreateWindow(WindowInfo)
                 local ButtonContent = New("Frame", {
                     AnchorPoint = Vector2.new(0.5, 0.5),
                     AutomaticSize = Enum.AutomaticSize.X,
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Position = UDim2.fromScale(0.5, 0.5),
                     Size = UDim2.fromOffset(0, 16),
                     Parent = Button,
@@ -7053,11 +7056,11 @@ function Library:CreateWindow(WindowInfo)
 
                 local ButtonLabel = New("TextLabel", {
                     AutomaticSize = Enum.AutomaticSize.X,
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Size = UDim2.fromOffset(0, 16),
                     Text = Name,
                     TextSize = 15,
-                    TextTransparency = 0.5,
+                    TextTransparency = 0.3,
                     Parent = ButtonContent,
                 })
 
@@ -7068,7 +7071,7 @@ function Library:CreateWindow(WindowInfo)
                 })
 
                 local Container = New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Position = UDim2.fromOffset(0, 35),
                     Size = UDim2.new(1, 0, 1, -35),
                     Visible = false,
@@ -7115,7 +7118,7 @@ function Library:CreateWindow(WindowInfo)
 
                 function Tab:Hide()
                     Button.BackgroundTransparency = 0
-                    ButtonLabel.TextTransparency = 0.5
+                    ButtonLabel.TextTransparency = 0.3
                     if ButtonIcon then
                         ButtonIcon.ImageTransparency = 0.5
                     end
@@ -7212,10 +7215,10 @@ function Library:CreateWindow(WindowInfo)
 
         function Tab:Hide()
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
             }):Play()
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = 0.5,
+                TextTransparency = 0.3,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
@@ -7275,7 +7278,7 @@ function Library:CreateWindow(WindowInfo)
         do
             TabButton = New("TextButton", {
                 BackgroundColor3 = "MainColor",
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(1, 0, 0, 40),
                 Text = "",
                 Parent = Tabs,
@@ -7286,18 +7289,20 @@ function Library:CreateWindow(WindowInfo)
                 PaddingRight = UDim.new(0, IsCompact and 6 or 12),
                 PaddingTop = UDim.new(0, IsCompact and 6 or 11),
                 Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
             })
 
             TabLabel = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Position = UDim2.fromOffset(30, 0),
                 Size = UDim2.new(1, -30, 1, 0),
                 Text = Name,
-                TextSize = 16,
-                TextTransparency = 0.5,
+                TextSize = 14,
+                TextTransparency = 0.3,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 Visible = not IsCompact,
                 Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
             })
 
             if Icon then
@@ -7310,6 +7315,7 @@ function Library:CreateWindow(WindowInfo)
                     Size = UDim2.fromScale(1, 1),
                     SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
                     Parent = TabButton,
+            New("UICorner",{CornerRadius=UDim.new(0,10),Parent=TabButton}),
                 })
             end
 
@@ -7322,7 +7328,7 @@ function Library:CreateWindow(WindowInfo)
             --// Tab Container \\--
             TabContainer = New("ScrollingFrame", {
                 AutomaticCanvasSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 CanvasSize = UDim2.fromScale(0, 0),
                 ScrollBarThickness = 0,
                 Size = UDim2.fromScale(1, 1),
@@ -7352,7 +7358,7 @@ function Library:CreateWindow(WindowInfo)
             assert(typeof(Callback) == "function", "Callback must be a function")
 
             local Holder = New("Frame", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.new(0.75, 0, 0, 21),
                 Parent = TabContainer,
             })
@@ -7449,10 +7455,10 @@ function Library:CreateWindow(WindowInfo)
 
         function Tab:Hide()
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
             }):Play()
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = 0.5,
+                TextTransparency = 0.3,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
@@ -7499,7 +7505,7 @@ function Library:CreateWindow(WindowInfo)
         DialogOverlay = New("TextButton", {
             AutoButtonColor = false,
             BackgroundColor3 = "DarkColor",
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 1),
             Text = "",
             Active = false,
@@ -7529,7 +7535,7 @@ function Library:CreateWindow(WindowInfo)
         Library:AddOutline(DialogFrame)
 
         local InnerContainer = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             ZIndex = 9002,
@@ -7556,7 +7562,7 @@ function Library:CreateWindow(WindowInfo)
         })
 
         local HeaderContainer = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             LayoutOrder = 1,
@@ -7574,7 +7580,7 @@ function Library:CreateWindow(WindowInfo)
         })
 
         local TitleRow = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 20),
             AutomaticSize = Enum.AutomaticSize.Y,
             LayoutOrder = 1,
@@ -7593,7 +7599,7 @@ function Library:CreateWindow(WindowInfo)
             local ParsedIcon = Library:GetCustomIcon(Info.Icon)
             if ParsedIcon then
                 local IconImg = New("ImageLabel", {
-                    BackgroundTransparency = 1,
+                    BackgroundTransparency = 0.2,
                     Size = UDim2.fromOffset(16, 16),
                     Image = ParsedIcon.Url,
                     ImageColor3 = "FontColor",
@@ -7610,7 +7616,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         local TitleLabel = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 18),
             AutomaticSize = Enum.AutomaticSize.Y,
             Text = Info.Title,
@@ -7625,7 +7631,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         local DescriptionLabel = New("TextLabel", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 14),
             AutomaticSize = Enum.AutomaticSize.Y,
             Text = Info.Description,
@@ -7642,7 +7648,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         DialogContainer = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             LayoutOrder = 4,
@@ -7670,7 +7676,7 @@ function Library:CreateWindow(WindowInfo)
         })
 
         ButtonsHolder = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Size = UDim2.new(1, 0, 0, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
             LayoutOrder = 6,
@@ -7786,7 +7792,7 @@ function Library:CreateWindow(WindowInfo)
             local WaitTime = ButtonInfo.WaitTime or 0
 
             local ButtonContainer = New("Frame", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromOffset(0, 26),
                 LayoutOrder = ButtonInfo.Order or 0,
                 ZIndex = 9002,
@@ -7838,7 +7844,7 @@ function Library:CreateWindow(WindowInfo)
             end
             
             local BtnLabel = New("TextLabel", {
-                BackgroundTransparency = 1,
+                BackgroundTransparency = 0.2,
                 Size = UDim2.fromScale(1, 1),
                 Text = ButtonInfo.Title or ButtonIdx,
                 TextColor3 = TextColor,
@@ -7873,7 +7879,7 @@ function Library:CreateWindow(WindowInfo)
                     IsActive = not Disabled
                     if Disabled then
                         TweenService:Create(TextBtn, Library.TweenInfo, { BackgroundTransparency = 0.5 }):Play()
-                        TweenService:Create(BtnLabel, Library.TweenInfo, { TextTransparency = 0.5 }):Play()
+                        TweenService:Create(BtnLabel, Library.TweenInfo, { TextTransparency = 0.3 }):Play()
                     else
                         TweenService:Create(TextBtn, Library.TweenInfo, { BackgroundTransparency = 0 }):Play()
                         TweenService:Create(BtnLabel, Library.TweenInfo, { TextTransparency = 0 }):Play()
@@ -7991,7 +7997,7 @@ function Library:CreateWindow(WindowInfo)
 
         local SidebarGrabber = New("TextButton", {
             AnchorPoint = Vector2.new(0.5, 0),
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0.2,
             Position = UDim2.fromScale(0.5, 0),
             Size = UDim2.new(0, 8, 1, 0),
             Text = "",
