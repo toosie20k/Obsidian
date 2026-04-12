@@ -201,9 +201,9 @@ local Library = {
     Scheme = {
     -- OnyxLib V2: Unified deep-charcoal palette
     BackgroundColor = Color3.fromRGB(12, 12, 16),
-    MainColor = Color3.fromRGB(20, 20, 26),
+    MainColor = Color3.fromRGB(22, 22, 22),
     AccentColor = Color3.fromRGB(100, 80, 240),
-    OutlineColor = Color3.fromRGB(40, 40, 56),
+    OutlineColor = Color3.fromRGB(42, 42, 42),
     FontColor = Color3.fromRGB(225, 225, 240),
     Font = Font.fromEnum(Enum.Font.GothamBold),
 
@@ -6058,10 +6058,10 @@ function Library:CreateWindow(WindowInfo)
         Library.KeybindFrame.Visible = false
 
         --// OnyxLib V2 -- unified deep-charcoal window
-        local ONYX_BG  = Color3.fromRGB(12, 12, 16)
-        local ONYX_TOP = Color3.fromRGB(18, 18, 22)
+        local ONYX_BG  = Color3.fromRGB(15, 15, 15)
+        local ONYX_TOP = Color3.fromRGB(22, 22, 22)
         local ONYX_ACC = Color3.fromRGB(100, 80, 240)
-        local ONYX_OUT = Color3.fromRGB(40, 40, 56)
+        local ONYX_OUT = Color3.fromRGB(42, 42, 42)
 
         MainFrame = New("TextButton", {
             BackgroundColor3 = ONYX_BG,
