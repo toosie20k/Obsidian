@@ -195,24 +195,24 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 10,
+    CornerRadius = 6,
 
     IsLightTheme = false,
     Scheme = {
-    -- OnyxLib V2: Unified deep-charcoal palette
-    BackgroundColor = Color3.fromRGB(12, 12, 16),
-    MainColor = Color3.fromRGB(22, 22, 22),
-    AccentColor = Color3.fromRGB(100, 80, 240),
-    OutlineColor = Color3.fromRGB(42, 42, 42),
-    FontColor = Color3.fromRGB(225, 225, 240),
-    Font = Font.fromEnum(Enum.Font.GothamBold),
+    -- Modern Electric Cyan aesthetic
+    BackgroundColor = Color3.fromRGB(13, 13, 15),
+    MainColor = Color3.fromRGB(20, 20, 22),
+    AccentColor = Color3.fromRGB(0, 255, 255),
+    OutlineColor = Color3.fromRGB(35, 35, 38),
+    FontColor = Color3.fromRGB(240, 240, 240),
+    Font = Font.fromEnum(Enum.Font.GothamMedium),
 
     RedColor = Color3.fromRGB(255, 65, 95),
     DarkColor = Color3.fromRGB(0, 0, 0),
     WhiteColor = Color3.fromRGB(255, 255, 255),
 
-    SidebarColor = Color3.fromRGB(12, 12, 16),
-    AccentGlow = Color3.fromRGB(200, 200, 220),
+    SidebarColor = Color3.fromRGB(13, 13, 15),
+    AccentGlow = Color3.fromRGB(0, 255, 255),
 },
 
     Registry = {},
@@ -295,10 +295,10 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 10,
+        CornerRadius = 6,
         NotifySide = "Right",
         ShowCustomCursor = true,
-        Font = Enum.Font.GothamBold,
+        Font = Enum.Font.GothamMedium,
         ToggleKeybind = Enum.KeyCode.RightControl,
         MobileButtonsSide = "Left",
         UnlockMouseWhileOpen = true,
