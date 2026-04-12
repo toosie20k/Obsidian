@@ -6125,19 +6125,37 @@ function Library:CreateWindow(WindowInfo)
         local TopBar = New("Frame", {
             BackgroundColor3 = ONYX_TOP,
             Size = UDim2.new(1, 0, 0, 50),
+            ZIndex = 2,
             Parent = MainFrame,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
+            CornerRadius = UDim.new(0, 2),
             Parent = TopBar,
         })
-        New("Frame", {
-            BackgroundColor3 = ONYX_TOP,
-            AnchorPoint = Vector2.new(0, 1),
-            Position = UDim2.fromScale(0, 1),
-            Size = UDim2.new(1, 0, 0, WindowInfo.CornerRadius),
+        
+        -- Header Mechanical Line
+        local HeaderLine = New("Frame", {
+            BackgroundColor3 = "AccentColor",
+            Position = UDim2.new(0, 0, 1, -1),
+            Size = UDim2.new(1, 0, 0, 1),
+            Transparency = 0.8,
+            ZIndex = 3,
             Parent = TopBar,
         })
+
+        -- Scanline Effect
+        local Scanline = New("Frame", {
+            BackgroundColor3 = "AccentColor",
+            BackgroundTransparency = 0.95,
+            Size = UDim2.new(1, 0, 0, 2),
+            ZIndex = 3,
+            Parent = TopBar,
+        })
+        task.spawn(function()
+            local TInfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1)
+            Scanline.Position = UDim2.fromScale(0, 0)
+            TweenService:Create(Scanline, TInfo, { Position = UDim2.fromScale(0, 1) }):Play()
+        end)
         Library:MakeDraggable(MainFrame, TopBar, false, true)
 
         --// TITLE AREA (sidebar header)
@@ -6198,6 +6216,22 @@ function Library:CreateWindow(WindowInfo)
         })
         Library:AddToRegistry(WindowTitle, { TextColor3 = "FontColor" })
 
+        -- Technical Header Detail
+        local SystemStatus = New("TextLabel", {
+            BackgroundColor3 = "AccentColor",
+            BackgroundTransparency = 0.9,
+            BorderSizePixel = 0,
+            Position = UDim2.new(0, X + 10, 0.5, -7),
+            Size = UDim2.fromOffset(80, 14),
+            Text = "SYSTEM: READY",
+            TextColor3 = "AccentColor",
+            TextSize = 10,
+            ZIndex = 1,
+            Parent = TitleHolder,
+        })
+        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = SystemStatus })
+        New("UIStroke", { Color = "AccentColor", Transparency = 0.8, Parent = SystemStatus })
+
         --// RIGHT WRAPPER (search + tab info)
         RightWrapper = New("Frame", {
             AnchorPoint = Vector2.new(1, 0.5),
@@ -6253,26 +6287,27 @@ function Library:CreateWindow(WindowInfo)
             Parent = CurrentTabInfo,
         })
 
-        -- Search box
+        -- Cybernetic Command Search Box
         SearchBox = New("TextBox", {
-            BackgroundColor3 = Color3.fromRGB(20, 20, 26),
-            PlaceholderText = "Search...",
+            BackgroundColor3 = "MainColor",
+            PlaceholderText = "COMMAND_PROMPT >>",
             Size = WindowInfo.SearchbarSize,
             TextScaled = true,
             Visible = not (WindowInfo.DisableSearch or false),
             Parent = RightWrapper,
         })
         New("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink, Parent = SearchBox })
-        New("UICorner", { CornerRadius = UDim.new(0, 8), Parent = SearchBox })
+        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = SearchBox })
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 7), PaddingLeft = UDim.new(0, 10),
             PaddingRight = UDim.new(0, 7), PaddingTop = UDim.new(0, 7),
             Parent = SearchBox,
         })
-        New("UIStroke", {
+        local SearchStroke = New("UIStroke", {
             ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-            Color = ONYX_OUT,
+            Color = "AccentColor",
             Thickness = 1,
+            Transparency = 0.5,
             Parent = SearchBox,
         })
         Library:AddToRegistry(SearchBox, { BackgroundColor3 = "MainColor" })
@@ -6332,12 +6367,14 @@ function Library:CreateWindow(WindowInfo)
             Size = UDim2.new(1, 0, 0, 24),
             Parent = MainFrame,
         })
-        New("TextLabel", {
+        local StatusText = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.fromScale(1, 1),
-            Text = WindowInfo.Footer,
-            TextSize = 12,
+            Position = UDim2.fromOffset(12, 0),
+            Size = UDim2.new(1, -24, 1, 0),
+            Text = WindowInfo.Footer .. " | L-LATENCY: 12ms | DPI: 100%",
+            TextSize = 11,
             TextTransparency = 0.65,
+            TextXAlignment = Enum.TextXAlignment.Left,
             Parent = BottomBar,
         })
 
@@ -6366,22 +6403,34 @@ function Library:CreateWindow(WindowInfo)
             Parent = ResizeButton,
         })
 
-        --// SIDEBAR -- same tone as topbar, NO purple tint
+        --// SIDEBAR -- tech-blade style
         local SidebarBG = New("Frame", {
-            BackgroundColor3 = Color3.fromRGB(14, 14, 18),
+            BackgroundColor3 = Color3.fromRGB(12, 12, 14),
             Position = UDim2.fromOffset(0, 0),
             Size = UDim2.new(0, InitialLeftWidth, 1, 0),
             ZIndex = 0,
             Parent = MainFrame,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, WindowInfo.CornerRadius), Parent = SidebarBG })
-        New("Frame", {
+        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = SidebarBG })
+        
+        -- Sidebar Vertical Tech Line
+        local SidebarLine = New("Frame", {
             AnchorPoint = Vector2.new(1, 0),
-            BackgroundColor3 = ONYX_TOP,
-            Position = UDim2.fromScale(1, 0),
-            Size = UDim2.new(0, WindowInfo.CornerRadius, 1, 0),
-            ZIndex = 0,
+            BackgroundColor3 = "AccentColor",
+            Position = UDim2.new(1, 0, 0, 51),
+            Size = UDim2.new(0, 1, 1, -75),
+            Transparency = 0.9,
+            ZIndex = 1,
             Parent = SidebarBG,
+        })
+        New("UIGradient", {
+            Transparency = NumberSequence.new({
+                NumberSequenceKeypoint.new(0, 1),
+                NumberSequenceKeypoint.new(0.5, 0.5),
+                NumberSequenceKeypoint.new(1, 1)
+            }),
+            Rotation = 90,
+            Parent = SidebarLine,
         })
 
         --// TABS scrollframe
@@ -6556,37 +6605,45 @@ function Library:CreateWindow(WindowInfo)
                 Parent = TabButton,
             })
 
-            -- Pill highlight — accent color, starts invisible
+            -- Cybernetic Blade Base
             TabPill = New("Frame", {
-                AnchorPoint = Vector2.new(0.5, 0.5),
-                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
+                BackgroundColor3 = "MainColor",
                 BackgroundTransparency = 1,
-                Position = UDim2.fromScale(0.5, 0.5),
+                Position = UDim2.fromScale(0, 0),
                 Size = UDim2.fromScale(1, 1),
                 ZIndex = 0,
                 Parent = TabButton,
             })
-            New("UICorner", {
-                CornerRadius = UDim.new(0, 8),
-                Parent = TabPill,
-            })
-            Library:AddToRegistry(TabPill, { BackgroundColor3 = "AccentColor" })
-
-            -- Left accent bar — 3px rounded, fully opaque accent when active
+            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = TabPill })
+            
+            -- Active Blade Indicator (Left Neon Bar)
             TabAccentBar = New("Frame", {
                 AnchorPoint = Vector2.new(0, 0.5),
-                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
+                BackgroundColor3 = "AccentColor",
                 BackgroundTransparency = 1,
                 Position = UDim2.new(0, 0, 0.5, 0),
-                Size = UDim2.new(0, 3, 0, 18),
-                ZIndex = 3,
+                Size = UDim2.new(0, 2, 0, 0), -- Stretches to 100% height when active
+                ZIndex = 2,
                 Parent = TabButton,
             })
-            New("UICorner", {
-                CornerRadius = UDim.new(1, 0),
-                Parent = TabAccentBar,
-            })
             Library:AddToRegistry(TabAccentBar, { BackgroundColor3 = "AccentColor" })
+            
+            -- Subtle Hover Glow Mask
+            local HoverGlow = New("Frame", {
+                BackgroundColor3 = "AccentColor",
+                BackgroundTransparency = 1,
+                Size = UDim2.fromScale(1, 1),
+                ZIndex = 0,
+                Parent = TabButton,
+            })
+            New("UIGradient", {
+                Color = ColorSequence.new({
+                    ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
+                    ColorSequenceKeypoint.new(1, Library.Scheme.BackgroundColor)
+                }),
+                Transparency = NumberSequence.new(0.85, 1),
+                Parent = HoverGlow,
+            })
 
             local ButtonPadding = New("UIPadding", {
                 PaddingBottom = UDim.new(0, IsCompact and 6 or 8),
@@ -7333,7 +7390,9 @@ function Library:CreateWindow(WindowInfo)
         TabButton.MouseLeave:Connect(function()
             Tab:Hover(false)
         end)
-        TabButton.MouseButton1Click:Connect(Tab.Show)
+        TabButton.MouseButton1Click:Connect(function()
+            Tab:Show()
+        end)
 
         Library.Tabs[Name] = Tab
 
@@ -7381,17 +7440,28 @@ function Library:CreateWindow(WindowInfo)
                 Parent = TabButton,
             })
 
-            TabLabel = New("TextLabel", {
+            -- Cybernetic Blade Base for KeyTab
+            TabPill = New("Frame", {
+                BackgroundColor3 = "MainColor",
                 BackgroundTransparency = 1,
-                Position = UDim2.fromOffset(30, 0),
-                Size = UDim2.new(1, -30, 1, 0),
-                Text = Name,
-                TextSize = 16,
-                TextTransparency = 0.5,
-                TextXAlignment = Enum.TextXAlignment.Left,
-                Visible = not IsCompact,
+                Position = UDim2.fromScale(0, 0),
+                Size = UDim2.fromScale(1, 1),
+                ZIndex = 0,
                 Parent = TabButton,
             })
+            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = TabPill })
+
+            -- Active Blade Indicator for KeyTab
+            TabAccentBar = New("Frame", {
+                AnchorPoint = Vector2.new(0, 0.5),
+                BackgroundColor3 = "AccentColor",
+                BackgroundTransparency = 1,
+                Position = UDim2.new(0, 0, 0.5, 0),
+                Size = UDim2.new(0, 2, 0, 0),
+                ZIndex = 2,
+                Parent = TabButton,
+            })
+            Library:AddToRegistry(TabAccentBar, { BackgroundColor3 = "AccentColor" })
 
             if Icon then
                 TabIcon = New("ImageLabel", {
@@ -7402,6 +7472,7 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0.5,
                     Size = UDim2.fromScale(1, 1),
                     SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
+                    ZIndex = 1,
                     Parent = TabButton,
                 })
             end
@@ -7570,7 +7641,9 @@ function Library:CreateWindow(WindowInfo)
         TabButton.MouseLeave:Connect(function()
             Tab:Hover(false)
         end)
-        TabButton.MouseButton1Click:Connect(Tab.Show)
+        TabButton.MouseButton1Click:Connect(function()
+            Tab:Show()
+        end)
 
         Tab.Container = TabContainer
         setmetatable(Tab, BaseGroupbox)
