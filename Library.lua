@@ -170,8 +170,8 @@ local Library = {
     ActiveDialog = nil,
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -195,20 +195,20 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 8,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
-    BackgroundColor = Color3.fromRGB(13, 13, 16),
-    MainColor = Color3.fromRGB(17, 17, 22),
-    AccentColor = Color3.fromRGB(99, 102, 241),   -- indigo
-    OutlineColor = Color3.fromRGB(30, 30, 40),
-    FontColor = Color3.new(1, 1, 1),
-    Font = Font.fromEnum(Enum.Font.GothamSsm),
+    BackgroundColor = Color3.fromRGB(10, 10, 14),
+    MainColor = Color3.fromRGB(18, 18, 24),
+    AccentColor = Color3.fromRGB(124, 92, 255),
+    OutlineColor = Color3.fromRGB(40, 40, 55),
+    FontColor = Color3.fromRGB(235, 235, 245),
+    Font = Font.fromEnum(Enum.Font.Gotham),
 
-    RedColor = Color3.fromRGB(244, 63, 94),
-    DarkColor = Color3.new(0, 0, 0),
-    WhiteColor = Color3.new(1, 1, 1),
+    RedColor = Color3.fromRGB(255, 80, 110),
+    DarkColor = Color3.fromRGB(0, 0, 0),
+    WhiteColor = Color3.fromRGB(255, 255, 255),
 },
 
     Registry = {},
