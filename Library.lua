@@ -1054,15 +1054,14 @@ local function FillInstance(Table: { [string]: any }, Instance: GuiObject)
     local ThemeProperties = Library.Registry[Instance] or {}
 
     for key, value in Table do
-        if ThemeProperties[key] then
-            ThemeProperties[key] = nil
-        
-        elseif key ~= "Text" then
+        if key ~= "Text" then
             local SchemeValue = GetSchemeValue(value)
 
             if SchemeValue or typeof(value) == "function" then
                 ThemeProperties[key] = value
                 value = SchemeValue or value()
+            else
+                ThemeProperties[key] = nil
             end
         end
 
@@ -1071,6 +1070,8 @@ local function FillInstance(Table: { [string]: any }, Instance: GuiObject)
 
     if GetTableSize(ThemeProperties) > 0 then
         Library.Registry[Instance] = ThemeProperties
+    else
+        Library.Registry[Instance] = nil
     end
 end
 
