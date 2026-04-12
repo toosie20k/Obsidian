@@ -170,8 +170,8 @@ local Library = {
     ActiveDialog = nil,
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -195,14 +195,14 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 12,
+    CornerRadius = 16,
 
     IsLightTheme = false,
     Scheme = {
-    BackgroundColor = Color3.fromRGB(10, 10, 14),
-    MainColor = Color3.fromRGB(18, 18, 24),
-    AccentColor = Color3.fromRGB(124, 92, 255),
-    OutlineColor = Color3.fromRGB(40, 40, 55),
+    BackgroundColor = Color3.fromRGB(15, 15, 20),
+    MainColor = Color3.fromRGB(22, 22, 30),
+    AccentColor = Color3.fromRGB(140, 110, 255),
+    OutlineColor = Color3.fromRGB(60, 60, 80),
     FontColor = Color3.fromRGB(235, 235, 245),
     Font = Font.fromEnum(Enum.Font.Gotham),
 
