@@ -212,7 +212,7 @@ local Library = {
     WhiteColor = Color3.fromRGB(255, 255, 255),
 
     SidebarColor = Color3.fromRGB(12, 12, 16),
-    AccentGlow = Color3.fromRGB(100, 80, 240),
+    AccentGlow = Color3.fromRGB(200, 200, 220),
 },
 
     Registry = {},
@@ -6059,7 +6059,7 @@ function Library:CreateWindow(WindowInfo)
 
         --// OnyxLib V2 -- unified deep-charcoal window
         local ONYX_BG  = Color3.fromRGB(12, 12, 16)
-        local ONYX_TOP = Color3.fromRGB(15, 15, 20)
+        local ONYX_TOP = Color3.fromRGB(18, 18, 22)
         local ONYX_ACC = Color3.fromRGB(100, 80, 240)
         local ONYX_OUT = Color3.fromRGB(40, 40, 56)
 
@@ -6368,7 +6368,7 @@ function Library:CreateWindow(WindowInfo)
 
         --// SIDEBAR -- same tone as topbar, NO purple tint
         local SidebarBG = New("Frame", {
-            BackgroundColor3 = ONYX_TOP,
+            BackgroundColor3 = Color3.fromRGB(14, 14, 18),
             Position = UDim2.fromOffset(0, 0),
             Size = UDim2.new(0, InitialLeftWidth, 1, 0),
             ZIndex = 0,
@@ -7281,7 +7281,7 @@ function Library:CreateWindow(WindowInfo)
 
             -- Pill: accent fill at low opacity
             TweenService:Create(TabPill, T, {
-                BackgroundTransparency = 0.82,
+                BackgroundTransparency = 0.93,
             }):Play()
             -- Accent bar: fully opaque
             TweenService:Create(TabAccentBar, T, {
@@ -7290,7 +7290,7 @@ function Library:CreateWindow(WindowInfo)
             -- Label: fully visible, accent color
             TweenService:Create(TabLabel, T, {
                 TextTransparency = 0,
-                TextColor3 = Color3.fromRGB(160, 140, 255),
+                TextColor3 = Color3.fromRGB(225, 225, 240),
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, T, { ImageTransparency = 0 }):Play()
