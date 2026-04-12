@@ -46,14 +46,6 @@ local CustomImageManagerAssets = {
 
         Id = nil,
     },
-
-    Shadow = {
-        RobloxId = 13160452183,
-        Path = "Obsidian/assets/WindowShadow.png",
-        URL = "", -- Placeholder for redesign
-
-        Id = nil,
-    },
 }
 do
     local function RecursiveCreatePath(Path: string, IsFile: boolean?)
@@ -178,8 +170,8 @@ local Library = {
     ActiveDialog = nil,
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.22, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.38, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -203,25 +195,25 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 2,
+    CornerRadius = 10,
 
     IsLightTheme = false,
     Scheme = {
-        -- Apex Viper: Industrial Cyberpunk
-        BackgroundColor = Color3.fromRGB(10, 10, 12),   -- Matte Obsidian
-        MainColor = Color3.fromRGB(18, 18, 22),         -- Industrial Slate
-        AccentColor = Color3.fromRGB(180, 255, 30),     -- Radioactive Lime
-        OutlineColor = Color3.fromRGB(35, 35, 40),       -- Sharp tech borders
-        FontColor = Color3.fromRGB(240, 240, 250),       -- Ice White
-        Font = Font.fromEnum(Enum.Font.RobotoMono),
+    -- OnyxLib V2: Unified deep-charcoal palette
+    BackgroundColor = Color3.fromRGB(12, 12, 16),
+    MainColor = Color3.fromRGB(22, 22, 22),
+    AccentColor = Color3.fromRGB(100, 80, 240),
+    OutlineColor = Color3.fromRGB(42, 42, 42),
+    FontColor = Color3.fromRGB(225, 225, 240),
+    Font = Font.fromEnum(Enum.Font.GothamBold),
 
-        RedColor = Color3.fromRGB(255, 40, 80),
-        DarkColor = Color3.fromRGB(0, 0, 0),
-        WhiteColor = Color3.fromRGB(255, 255, 255),
+    RedColor = Color3.fromRGB(255, 65, 95),
+    DarkColor = Color3.fromRGB(0, 0, 0),
+    WhiteColor = Color3.fromRGB(255, 255, 255),
 
-        SidebarColor = Color3.fromRGB(12, 12, 15),
-        AccentGlow = Color3.fromRGB(0, 255, 120),        -- Neon Emerald Glow
-    },
+    SidebarColor = Color3.fromRGB(12, 12, 16),
+    AccentGlow = Color3.fromRGB(200, 200, 220),
+},
 
     Registry = {},
     Scales = {},
@@ -1606,7 +1598,7 @@ function Library:AddDraggableMenu(Name: string)
         Parent = ScreenGui,
     })
     New("UICorner", {
-        CornerRadius = UDim.new(0, 2),
+        CornerRadius = UDim.new(0, Library.CornerRadius),
         Parent = Holder,
     })
     table.insert(
@@ -1693,16 +1685,14 @@ function Library:AddContextMenu(
             BorderSizePixel = 1,
             BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
             CanvasSize = UDim2.fromOffset(0, 0),
-            ScrollBarImageColor3 = "AccentColor",
+            ScrollBarImageColor3 = "OutlineColor",
             ScrollBarThickness = List == 2 and 2 or 0,
             Size = typeof(Size) == "function" and Size() or Size,
             TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
             Visible = false,
-            ZIndex = 11, -- Increased for overlay
+            ZIndex = 10,
             Parent = ScreenGui,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Menu })
-        New("UIStroke", { Color = "AccentColor", Thickness = 1, Parent = Menu })
     else
         Menu = New("Frame", {
             BackgroundColor3 = "BackgroundColor",
@@ -1710,11 +1700,9 @@ function Library:AddContextMenu(
             BorderSizePixel = 1,
             Size = typeof(Size) == "function" and Size() or Size,
             Visible = false,
-            ZIndex = 11,
+            ZIndex = 10,
             Parent = ScreenGui,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Menu })
-        New("UIStroke", { Color = "AccentColor", Thickness = 1, Parent = Menu })
     end
     table.insert(
         Library.Scales,
@@ -2181,12 +2169,9 @@ do
             BorderSizePixel = 1,
             Size = UDim2.fromOffset(18, 18),
             Text = KeyPicker.Value,
-            TextColor3 = "AccentColor", -- Radioactive Text
-            TextSize = 13,
+            TextSize = 14,
             Parent = ToggleLabel,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Picker })
-        New("UIStroke", { Color = "OutlineColor", Thickness = 1, Parent = Picker })
 
         local KeybindsToggle = { Normal = KeyPicker.Mode ~= "Toggle" }
         do
@@ -2217,13 +2202,11 @@ do
                 Parent = Holder,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 2),
+                CornerRadius = UDim.new(0, Library.CornerRadius / 2),
                 Parent = Checkbox,
             })
             New("UIStroke", {
-                Color = "AccentColor",
-                Thickness = 1,
-                Transparency = 0.5,
+                Color = "OutlineColor",
                 Parent = Checkbox,
             })
 
@@ -2811,7 +2794,6 @@ do
                 Size = UDim2.new(1, 2, 0, 1),
                 Parent = TransparencySelector,
             })
-            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = TransparencyCursor })
         end
 
         local InfoHolder = New("Frame", {
@@ -2836,8 +2818,6 @@ do
             TextSize = 14,
             Parent = InfoHolder,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = HueBox })
-        New("UIStroke", { Color = "OutlineColor", Thickness = 1, Parent = HueBox })
 
         local RgbBox = New("TextBox", {
             BackgroundColor3 = "MainColor",
@@ -2849,8 +2829,6 @@ do
             TextSize = 14,
             Parent = InfoHolder,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = RgbBox })
-        New("UIStroke", { Color = "OutlineColor", Thickness = 1, Parent = RgbBox })
 
         --// Context Menu \\--
         local ContextMenu = Library:AddContextMenu(Holder, UDim2.fromOffset(93, 0), function()
@@ -2911,8 +2889,6 @@ do
 
             Holder.BackgroundColor3 = ColorPicker.Value
             Holder.BorderColor3 = Library:GetDarkerColor(ColorPicker.Value)
-            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Holder })
-            New("UIStroke", { Color = "AccentColor", Thickness = 1, Transparency = 0.5, Parent = Holder })
             HolderTransparency.ImageTransparency = (1 - ColorPicker.Transparency)
 
             SatVipMap.BackgroundColor3 = Color3.fromHSV(ColorPicker.Hue, 1, 1)
@@ -3355,12 +3331,10 @@ do
                 Visible = Button.Visible,
                 Parent = Holder,
             })
-            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Base })
 
             local Stroke = New("UIStroke", {
                 Color = "OutlineColor",
                 Transparency = Button.Disabled and 0.5 or 0,
-                Thickness = 1,
                 Parent = Base,
             })
 
@@ -3375,10 +3349,8 @@ do
 
                 Button.Tween = TweenService:Create(Button.Base, Library.TweenInfo, {
                     TextTransparency = 0,
-                    TextColor3 = Library.Scheme.AccentColor
                 })
                 Button.Tween:Play()
-                TweenService:Create(Button.Stroke, Library.TweenInfo, { Color = Library.Scheme.AccentColor }):Play()
             end)
             Button.Base.MouseLeave:Connect(function()
                 if Button.Disabled then
@@ -3387,10 +3359,8 @@ do
 
                 Button.Tween = TweenService:Create(Button.Base, Library.TweenInfo, {
                     TextTransparency = 0.4,
-                    TextColor3 = Library.Scheme.FontColor
                 })
                 Button.Tween:Play()
-                TweenService:Create(Button.Stroke, Library.TweenInfo, { Color = Library.Scheme.OutlineColor }):Play()
             end)
 
             Button.Base.MouseButton1Click:Connect(function()
@@ -3634,19 +3604,18 @@ do
             Parent = Button,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
+            CornerRadius = UDim.new(0, Library.CornerRadius / 2),
             Parent = Checkbox,
         })
 
         local CheckboxStroke = New("UIStroke", {
             Color = "OutlineColor",
-            Thickness = 1,
             Parent = Checkbox,
         })
 
         local CheckImage = New("ImageLabel", {
             Image = CheckIcon and CheckIcon.Url or "",
-            ImageColor3 = "AccentColor",
+            ImageColor3 = "FontColor",
             ImageRectOffset = CheckIcon and CheckIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = CheckIcon and CheckIcon.ImageRectSize or Vector2.zero,
             ImageTransparency = 1,
@@ -3834,11 +3803,11 @@ do
             AnchorPoint = Vector2.new(1, 0),
             BackgroundColor3 = "MainColor",
             Position = UDim2.fromScale(1, 0),
-            Size = UDim2.fromOffset(30, 16),
+            Size = UDim2.fromOffset(32, 18),
             Parent = Button,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
+            CornerRadius = UDim.new(1, 0),
             Parent = Switch,
         })
         New("UIPadding", {
@@ -3860,7 +3829,7 @@ do
             Parent = Switch,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
+            CornerRadius = UDim.new(1, 0),
             Parent = Ball,
         })
 
@@ -4058,12 +4027,6 @@ do
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = Holder,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Box })
-        local InputStroke = New("UIStroke", {
-            Color = "OutlineColor",
-            Thickness = 1,
-            Parent = Box,
-        })
 
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 3),
@@ -4224,13 +4187,9 @@ do
             BorderColor3 = "OutlineColor",
             BorderSizePixel = 1,
             Position = UDim2.fromScale(0, 1),
-            Size = UDim2.new(1, 0, 0, 14),
+            Size = UDim2.new(1, 0, 0, 13),
             Text = "",
             Parent = Holder,
-        })
-        New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
-            Parent = Bar,
         })
 
         local DisplayLabel = New("TextLabel", {
@@ -4252,17 +4211,6 @@ do
             BackgroundColor3 = "AccentColor",
             Size = UDim2.fromScale(0.5, 1),
             Parent = Bar,
-        })
-        New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
-            Parent = Fill,
-        })
-        New("UIGradient", {
-            Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
-                ColorSequenceKeypoint.new(1, Library.Scheme.AccentGlow)
-            }),
-            Parent = Fill,
         })
 
         function Slider:UpdateColors()
@@ -4506,7 +4454,6 @@ do
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = Holder,
         })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Display })
 
         New("UIPadding", {
             PaddingLeft = UDim.new(0, 8),
@@ -4517,7 +4464,7 @@ do
         local ArrowImage = New("ImageLabel", {
             AnchorPoint = Vector2.new(1, 0.5),
             Image = ArrowIcon and ArrowIcon.Url or "",
-            ImageColor3 = "AccentColor",
+            ImageColor3 = "FontColor",
             ImageRectOffset = ArrowIcon and ArrowIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = ArrowIcon and ArrowIcon.ImageRectSize or Vector2.zero,
             ImageTransparency = 0.5,
@@ -4653,7 +4600,7 @@ do
                 local Table = {}
 
                 local Button = New("TextButton", {
-                    BackgroundColor3 = "AccentColor",
+                    BackgroundColor3 = "MainColor",
                     BackgroundTransparency = 1,
                     LayoutOrder = IsDisabled and 1 or 0,
                     Size = UDim2.new(1, 0, 0, 21),
@@ -4663,15 +4610,6 @@ do
                     TextXAlignment = Enum.TextXAlignment.Left,
                     Parent = MenuTable.Menu,
                 })
-                New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Button })
-                local Highlight = New("Frame", {
-                    BackgroundColor3 = "AccentColor",
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1, 0, 1, 0),
-                    ZIndex = 0,
-                    Parent = Button,
-                })
-                New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = Highlight })
                 New("UIPadding", {
                     PaddingLeft = UDim.new(0, 7),
                     PaddingRight = UDim.new(0, 7),
@@ -4692,9 +4630,8 @@ do
                         Selected = Dropdown.Value == Value
                     end
 
-                    Highlight.BackgroundTransparency = Selected and 0.85 or 1
+                    Button.BackgroundTransparency = Selected and 0 or 1
                     Button.TextTransparency = IsDisabled and 0.8 or Selected and 0 or 0.5
-                    Button.TextColor3 = Selected and Library.Scheme.AccentColor or Library.Scheme.FontColor
                 end
 
                 if not IsDisabled then
@@ -5789,7 +5726,7 @@ function Library:Notify(...)
         Parent = FakeBackground,
     })
     New("UICorner", {
-        CornerRadius = UDim.new(0, 2),
+        CornerRadius = UDim.new(0, Library.CornerRadius),
         Parent = Holder,
     })
     New("UIListLayout", {
@@ -6120,23 +6057,14 @@ function Library:CreateWindow(WindowInfo)
         Library.KeybindFrame.Position = UDim2.new(0, 6, 0.5, 0)
         Library.KeybindFrame.Visible = false
 
-        --// Nebula Frost: Deep structural depth
-        local GlowLayer = New("ImageLabel", {
-            AnchorPoint = Vector2.new(0.5, 0.5),
-            BackgroundTransparency = 1,
-            Image = CustomImageManager.GetAsset("Shadow"),
-            ImageColor3 = Color3.fromRGB(0, 0, 0),
-            ImageTransparency = 0.5,
-            Position = WindowInfo.Position + UDim2.fromOffset(WindowInfo.Size.X.Offset/2, WindowInfo.Size.Y.Offset/2),
-            Size = UDim2.new(0, WindowInfo.Size.X.Offset + 120, 0, WindowInfo.Size.Y.Offset + 120),
-            ZIndex = -1,
-            Visible = false,
-            Parent = ScreenGui,
-        })
+        --// OnyxLib V2 -- unified deep-charcoal window
+        local ONYX_BG  = Color3.fromRGB(15, 15, 15)
+        local ONYX_TOP = Color3.fromRGB(22, 22, 22)
+        local ONYX_ACC = Color3.fromRGB(100, 80, 240)
+        local ONYX_OUT = Color3.fromRGB(42, 42, 42)
 
         MainFrame = New("TextButton", {
-            BackgroundColor3 = "BackgroundColor",
-            BackgroundTransparency = 0, -- Matte Obsidian
+            BackgroundColor3 = ONYX_BG,
             Name = "Main",
             Text = "",
             Position = WindowInfo.Position,
@@ -6145,37 +6073,18 @@ function Library:CreateWindow(WindowInfo)
             Parent = ScreenGui,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2), -- Sharp industrial
+            CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
             Parent = MainFrame,
         })
         table.insert(Library.Scales, New("UIScale", { Parent = MainFrame }))
-
-        -- Apex Viper Neon Border
+        -- Glass edge 1px white stroke
         New("UIStroke", {
             ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-            Color = "AccentColor",
-            Thickness = 1.5,
-            Transparency = 0,
+            Color = Color3.fromRGB(255, 255, 255),
+            Thickness = 1,
+            Transparency = 0.85,
             Parent = MainFrame,
         })
-        local GlowStroke = New("UIStroke", {
-            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-            Color = "AccentGlow",
-            Thickness = 3,
-            Transparency = 0.6,
-            Parent = MainFrame,
-        })
-
-        -- Sync Glow with MainFrame
-        MainFrame:GetPropertyChangedSignal("Position"):Connect(function()
-            GlowLayer.Position = MainFrame.Position + UDim2.fromOffset(MainFrame.Size.X.Offset/2, MainFrame.Size.Y.Offset/2)
-        end)
-        MainFrame:GetPropertyChangedSignal("Size"):Connect(function()
-            GlowLayer.Size = UDim2.new(0, MainFrame.Size.X.Offset + 120, 0, MainFrame.Size.Y.Offset + 120)
-        end)
-        MainFrame:GetPropertyChangedSignal("Visible"):Connect(function()
-            GlowLayer.Visible = MainFrame.Visible
-        end)
 
         -- Separator under top bar
         Library:MakeLine(MainFrame, {
@@ -6183,11 +6092,11 @@ function Library:CreateWindow(WindowInfo)
             Size = UDim2.new(1, 0, 0, 1),
         })
 
-        -- Sidebar divider (Radioactive)
+        -- Sidebar divider
         DividerLine = New("Frame", {
-            BackgroundColor3 = "AccentColor",
+            BackgroundColor3 = ONYX_OUT,
             Position = UDim2.fromOffset(InitialLeftWidth, 0),
-            Size = UDim2.new(0, 1, 1, 0),
+            Size = UDim2.new(0, 1, 1, -24),
             Parent = MainFrame,
         })
 
@@ -6203,7 +6112,7 @@ function Library:CreateWindow(WindowInfo)
                 Parent = MainFrame,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 2),
+                CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
                 Parent = BackgroundImage,
             })
         end
@@ -6212,31 +6121,22 @@ function Library:CreateWindow(WindowInfo)
             MainFrame.Position = UDim2.new(0.5, -MainFrame.Size.X.Offset / 2, 0.5, -MainFrame.Size.Y.Offset / 2)
         end
 
-        --// INDUSTRIAL HEADER
+        --// TOP BAR
         local TopBar = New("Frame", {
-            BackgroundColor3 = "MainColor",
-            BackgroundTransparency = 0,
-            Size = UDim2.new(1, 0, 0, 48),
+            BackgroundColor3 = ONYX_TOP,
+            Size = UDim2.new(1, 0, 0, 50),
             Parent = MainFrame,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
+            CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
             Parent = TopBar,
         })
-        -- Header Slant Accent
-        local Slant = New("Frame", {
-            BackgroundColor3 = "AccentColor",
-            AnchorPoint = Vector2.new(1, 0),
-            Position = UDim2.new(1, 0, 0, 0),
-            Size = UDim2.new(0, 4, 1, 0),
+        New("Frame", {
+            BackgroundColor3 = ONYX_TOP,
+            AnchorPoint = Vector2.new(0, 1),
+            Position = UDim2.fromScale(0, 1),
+            Size = UDim2.new(1, 0, 0, WindowInfo.CornerRadius),
             Parent = TopBar,
-        })
-        New("UIGradient", {
-            Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Library.Scheme.AccentColor),
-                ColorSequenceKeypoint.new(1, Library.Scheme.AccentGlow)
-            }),
-            Parent = Slant,
         })
         Library:MakeDraggable(MainFrame, TopBar, false, true)
 
@@ -6259,27 +6159,14 @@ function Library:CreateWindow(WindowInfo)
             Parent = TitleHolder,
         })
 
-        -- Apex Viper Branding
-        local StatusIndicator = New("Frame", {
-            BackgroundColor3 = "AccentColor",
-            Size = UDim2.fromOffset(8, 8),
+        -- Accent pill brand mark
+        local BrandPill = New("Frame", {
+            BackgroundColor3 = ONYX_ACC,
+            Size = UDim2.fromOffset(4, 16),
             Parent = TitleHolder,
         })
-        New("UICorner", { CornerRadius = UDim.new(1, 0), Parent = StatusIndicator })
-        
-        -- Pulsing logic
-        task.spawn(function()
-            while task.wait(1.5) do
-                if not MainFrame.Parent then break end
-                TweenService:Create(StatusIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
-                    BackgroundTransparency = 0.6
-                }):Play()
-                task.wait(0.6)
-                TweenService:Create(StatusIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
-                    BackgroundTransparency = 0
-                }):Play()
-            end
-        end)
+        New("UICorner", { CornerRadius = UDim.new(1, 0), Parent = BrandPill })
+        Library:AddToRegistry(BrandPill, { BackgroundColor3 = "AccentColor" })
 
         if WindowInfo.Icon then
             WindowIcon = New("ImageLabel", {
@@ -6368,23 +6255,23 @@ function Library:CreateWindow(WindowInfo)
 
         -- Search box
         SearchBox = New("TextBox", {
-            BackgroundColor3 = "MainColor",
-            PlaceholderText = "SEARCHF_PROMPT >>",
+            BackgroundColor3 = Color3.fromRGB(20, 20, 26),
+            PlaceholderText = "Search...",
             Size = WindowInfo.SearchbarSize,
             TextScaled = true,
             Visible = not (WindowInfo.DisableSearch or false),
             Parent = RightWrapper,
         })
         New("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink, Parent = SearchBox })
-        New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = SearchBox })
+        New("UICorner", { CornerRadius = UDim.new(0, 8), Parent = SearchBox })
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 7), PaddingLeft = UDim.new(0, 10),
             PaddingRight = UDim.new(0, 7), PaddingTop = UDim.new(0, 7),
             Parent = SearchBox,
         })
-        local SearchStroke = New("UIStroke", {
+        New("UIStroke", {
             ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-            Color = "OutlineColor",
+            Color = ONYX_OUT,
             Thickness = 1,
             Parent = SearchBox,
         })
@@ -6655,9 +6542,9 @@ function Library:CreateWindow(WindowInfo)
         local TabPill = nil
         local TabAccentBar = nil
         do
-            -- Apex Viper Industrial Tab Button
+            -- OnyxLib V2 pill nav button
             TabButton = New("TextButton", {
-                BackgroundColor3 = "MainColor",
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                 BackgroundTransparency = 1,
                 Size = UDim2.new(1, 0, 0, 36),
                 Text = "",
@@ -6665,40 +6552,41 @@ function Library:CreateWindow(WindowInfo)
                 Parent = Tabs,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 2),
+                CornerRadius = UDim.new(0, 8),
                 Parent = TabButton,
             })
 
-            -- Side Indicator (Radioactive)
+            -- Pill highlight — accent color, starts invisible
             TabPill = New("Frame", {
-                BackgroundColor3 = "AccentColor",
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
                 BackgroundTransparency = 1,
-                Position = UDim2.fromScale(0, 0),
-                Size = UDim2.new(0, 2, 1, 0),
-                ZIndex = 2,
-                Parent = TabButton,
-            })
-            New("UIStroke", {
-                Color = "AccentGlow",
-                Thickness = 2,
-                Transparency = 0.5,
-                Parent = TabPill,
-            })
-
-            -- Slanted Decorative Cut
-            TabAccentBar = New("Frame", {
-                AnchorPoint = Vector2.new(1, 0.5),
-                BackgroundColor3 = "AccentColor",
-                BackgroundTransparency = 0.95,
-                Position = UDim2.new(1, 0, 0.5, 0),
-                Size = UDim2.new(1, 0, 1, 0),
-                ZIndex = 1,
+                Position = UDim2.fromScale(0.5, 0.5),
+                Size = UDim2.fromScale(1, 1),
+                ZIndex = 0,
                 Parent = TabButton,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 2),
+                CornerRadius = UDim.new(0, 8),
+                Parent = TabPill,
+            })
+            Library:AddToRegistry(TabPill, { BackgroundColor3 = "AccentColor" })
+
+            -- Left accent bar — 3px rounded, fully opaque accent when active
+            TabAccentBar = New("Frame", {
+                AnchorPoint = Vector2.new(0, 0.5),
+                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
+                BackgroundTransparency = 1,
+                Position = UDim2.new(0, 0, 0.5, 0),
+                Size = UDim2.new(0, 3, 0, 18),
+                ZIndex = 3,
+                Parent = TabButton,
+            })
+            New("UICorner", {
+                CornerRadius = UDim.new(1, 0),
                 Parent = TabAccentBar,
             })
+            Library:AddToRegistry(TabAccentBar, { BackgroundColor3 = "AccentColor" })
 
             local ButtonPadding = New("UIPadding", {
                 PaddingBottom = UDim.new(0, IsCompact and 6 or 8),
@@ -7077,24 +6965,11 @@ function Library:CreateWindow(WindowInfo)
                     Parent = BoxHolder,
                 })
                 New("UICorner", {
-                    CornerRadius = UDim.new(0, 2),
+                    CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
                     Parent = GroupboxHolder,
                 })
-                New("UIStroke", {
-                    Color = "AccentColor",
-                    Thickness = 1,
-                    Transparency = 0.5,
-                    Parent = GroupboxHolder,
-                })
+                Library:AddOutline(GroupboxHolder)
 
-                -- Industrial Accent Bar
-                New("Frame", {
-                    BackgroundColor3 = "AccentColor",
-                    Position = UDim2.fromOffset(0, 0),
-                    Size = UDim2.new(1, 0, 0, 2),
-                    Parent = GroupboxHolder,
-                })
-                
                 Library:MakeLine(GroupboxHolder, {
                     Position = UDim2.fromOffset(0, 34),
                     Size = UDim2.new(1, 0, 0, 1),
@@ -7117,9 +6992,8 @@ function Library:CreateWindow(WindowInfo)
                     BackgroundTransparency = 1,
                     Position = UDim2.fromOffset(BoxIcon and 24 or 0, 0),
                     Size = UDim2.new(1, 0, 0, 34),
-                    Text = Info.Name:upper(),
-                    Font = Enum.Font.GothamBold,
-                    TextSize = 13,
+                    Text = Info.Name,
+                    TextSize = 15,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     Parent = GroupboxHolder,
                 })
@@ -7206,15 +7080,10 @@ function Library:CreateWindow(WindowInfo)
                     Parent = BoxHolder,
                 })
                 New("UICorner", {
-                    CornerRadius = UDim.new(0, 2),
+                    CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
                     Parent = TabboxHolder,
                 })
-                New("UIStroke", {
-                    Color = "AccentColor",
-                    Thickness = 1,
-                    Transparency = 0.5,
-                    Parent = TabboxHolder,
-                })
+                Library:AddOutline(TabboxHolder)
 
                 TabboxButtons = New("Frame", {
                     BackgroundTransparency = 1,
@@ -7391,15 +7260,16 @@ function Library:CreateWindow(WindowInfo)
 
         function Tab:Hover(Hovering)
             if Library.ActiveTab == Tab then return end
-            TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = Hovering and 0.25 or 0.5,
+            local T = TweenInfo.new(0.16, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+            TweenService:Create(TabLabel, T, {
+                TextTransparency = Hovering and 0.15 or 0.5,
             }):Play()
-            TweenService:Create(TabPill, Library.TweenInfo, {
-                BackgroundTransparency = Hovering and 0.9 or 1,
+            TweenService:Create(TabPill, T, {
+                BackgroundTransparency = Hovering and 0.92 or 1,
             }):Play()
             if TabIcon then
-                TweenService:Create(TabIcon, Library.TweenInfo, {
-                    ImageTransparency = Hovering and 0.25 or 0.5,
+                TweenService:Create(TabIcon, T, {
+                    ImageTransparency = Hovering and 0.2 or 0.5,
                 }):Play()
             end
         end
@@ -7407,21 +7277,23 @@ function Library:CreateWindow(WindowInfo)
         function Tab:Show()
             if Library.ActiveTab then Library.ActiveTab:Hide() end
 
-            -- Pill: accent fill
-            TweenService:Create(TabPill, Library.TweenInfo, {
-                BackgroundTransparency = 0.85,
+            local T = TweenInfo.new(0.22, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+
+            -- Pill: accent fill at low opacity
+            TweenService:Create(TabPill, T, {
+                BackgroundTransparency = 0.93,
             }):Play()
             -- Accent bar: fully opaque
-            TweenService:Create(TabAccentBar, Library.TweenInfo, {
+            TweenService:Create(TabAccentBar, T, {
                 BackgroundTransparency = 0,
             }):Play()
-            -- Label: crystal white
-            TweenService:Create(TabLabel, Library.TweenInfo, {
+            -- Label: fully visible, accent color
+            TweenService:Create(TabLabel, T, {
                 TextTransparency = 0,
-                TextColor3 = Color3.fromRGB(250, 250, 255),
+                TextColor3 = Color3.fromRGB(225, 225, 240),
             }):Play()
             if TabIcon then
-                TweenService:Create(TabIcon, Library.TweenInfo, { ImageTransparency = 0 }):Play()
+                TweenService:Create(TabIcon, T, { ImageTransparency = 0 }):Play()
             end
 
             if Description then Window:ShowTabInfo(Name, Description) end
@@ -7434,14 +7306,16 @@ function Library:CreateWindow(WindowInfo)
         end
 
         function Tab:Hide()
-            TweenService:Create(TabPill, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
-            TweenService:Create(TabAccentBar, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
-            TweenService:Create(TabLabel, Library.TweenInfo, {
+            local T = TweenInfo.new(0.18, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+
+            TweenService:Create(TabPill, T, { BackgroundTransparency = 1 }):Play()
+            TweenService:Create(TabAccentBar, T, { BackgroundTransparency = 1 }):Play()
+            TweenService:Create(TabLabel, T, {
                 TextTransparency = 0.5,
-                TextColor3 = "FontColor",
+                TextColor3 = Library.Scheme.FontColor,
             }):Play()
             if TabIcon then
-                TweenService:Create(TabIcon, Library.TweenInfo, { ImageTransparency = 0.5 }):Play()
+                TweenService:Create(TabIcon, T, { ImageTransparency = 0.5 }):Play()
             end
             TabContainer.Visible = false
             Window:HideTabInfo()
@@ -7499,19 +7373,42 @@ function Library:CreateWindow(WindowInfo)
                 Text = "",
                 Parent = Tabs,
             })
-            New("UICorner", { CornerRadius = UDim.new(0, 8), Parent = TabButton })
-
-            TabPill = New("Frame", {
-                BackgroundColor3 = "AccentColor",
-                BackgroundTransparency = 1,
-                Size = UDim2.fromScale(1, 1),
+            local ButtonPadding = New("UIPadding", {
+                PaddingBottom = UDim.new(0, IsCompact and 6 or 11),
+                PaddingLeft = UDim.new(0, IsCompact and 6 or 12),
+                PaddingRight = UDim.new(0, IsCompact and 6 or 12),
+                PaddingTop = UDim.new(0, IsCompact and 6 or 11),
                 Parent = TabButton,
             })
-            New("UICorner", { CornerRadius = UDim.new(0, 8), Parent = TabPill })
+
+            TabLabel = New("TextLabel", {
+                BackgroundTransparency = 1,
+                Position = UDim2.fromOffset(30, 0),
+                Size = UDim2.new(1, -30, 1, 0),
+                Text = Name,
+                TextSize = 16,
+                TextTransparency = 0.5,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                Visible = not IsCompact,
+                Parent = TabButton,
+            })
+
+            if Icon then
+                TabIcon = New("ImageLabel", {
+                    Image = Icon.Url,
+                    ImageColor3 = Icon.Custom and "WhiteColor" or "AccentColor",
+                    ImageRectOffset = Icon.ImageRectOffset,
+                    ImageRectSize = Icon.ImageRectSize,
+                    ImageTransparency = 0.5,
+                    Size = UDim2.fromScale(1, 1),
+                    SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
+                    Parent = TabButton,
+                })
+            end
 
             table.insert(Library.TabButtons, {
                 Label = TabLabel,
-                Pill = TabPill,
+                Padding = ButtonPadding,
                 Icon = TabIcon,
             })
 
@@ -7598,13 +7495,12 @@ function Library:CreateWindow(WindowInfo)
         function Tab:Resize() end
 
         function Tab:Hover(Hovering)
-            if Library.ActiveTab == Tab then return end
+            if Library.ActiveTab == Tab then
+                return
+            end
 
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = Hovering and 0.25 or 0.5,
-            }):Play()
-            TweenService:Create(TabAccentBar, Library.TweenInfo, {
-                BackgroundTransparency = Hovering and 0.9 or 0.95,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
@@ -7614,38 +7510,47 @@ function Library:CreateWindow(WindowInfo)
         end
 
         function Tab:Show()
-            if Library.ActiveTab then Library.ActiveTab:Hide() end
+            if Library.ActiveTab then
+                Library.ActiveTab:Hide()
+            end
 
             TweenService:Create(TabButton, Library.TweenInfo, {
-                BackgroundTransparency = 0.85,
-            }):Play()
-            TweenService:Create(TabPill, Library.TweenInfo, {
                 BackgroundTransparency = 0,
-            }):Play()
-            TweenService:Create(TabAccentBar, Library.TweenInfo, {
-                BackgroundTransparency = 0.85,
             }):Play()
             TweenService:Create(TabLabel, Library.TweenInfo, {
                 TextTransparency = 0,
             }):Play()
             if TabIcon then
-                TweenService:Create(TabIcon, Library.TweenInfo, { ImageTransparency = 0 }):Play()
+                TweenService:Create(TabIcon, Library.TweenInfo, {
+                    ImageTransparency = 0,
+                }):Play()
             end
             TabContainer.Visible = true
 
-            if Description then Window:ShowTabInfo(Name, Description) end
+            if Description then
+                Window:ShowTabInfo(Name, Description)
+            end
+
             Tab:RefreshSides()
+
             Library.ActiveTab = Tab
-            if Library.Searching then Library:UpdateSearch(Library.SearchText) end
+
+            if Library.Searching then
+                Library:UpdateSearch(Library.SearchText)
+            end
         end
 
         function Tab:Hide()
-            TweenService:Create(TabButton, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
-            TweenService:Create(TabPill, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
-            TweenService:Create(TabAccentBar, Library.TweenInfo, { BackgroundTransparency = 0.95 }):Play()
-            TweenService:Create(TabLabel, Library.TweenInfo, { TextTransparency = 0.5 }):Play()
+            TweenService:Create(TabButton, Library.TweenInfo, {
+                BackgroundTransparency = 1,
+            }):Play()
+            TweenService:Create(TabLabel, Library.TweenInfo, {
+                TextTransparency = 0.5,
+            }):Play()
             if TabIcon then
-                TweenService:Create(TabIcon, Library.TweenInfo, { ImageTransparency = 0.5 }):Play()
+                TweenService:Create(TabIcon, Library.TweenInfo, {
+                    ImageTransparency = 0.5,
+                }):Play()
             end
             TabContainer.Visible = false
 
@@ -7711,15 +7616,10 @@ function Library:CreateWindow(WindowInfo)
             Parent = DialogOverlay,
         })
         New("UICorner", {
-            CornerRadius = UDim.new(0, 2),
+            CornerRadius = UDim.new(0, WindowInfo.CornerRadius),
             Parent = DialogFrame,
         })
-        local DialogStroke = New("UIStroke", {
-            Color = "AccentColor",
-            Thickness = 1,
-            Transparency = 0.5,
-            Parent = DialogFrame,
-        })
+        Library:AddOutline(DialogFrame)
 
         local InnerContainer = New("Frame", {
             BackgroundTransparency = 1,
@@ -8015,7 +7915,7 @@ function Library:CreateWindow(WindowInfo)
                 Parent = ButtonContainer,
             })
             Library:AddOutline(TextBtn)
-            New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = TextBtn })
+            New("UICorner", { CornerRadius = UDim.new(0, Library.CornerRadius), Parent = TextBtn })
 
             local _BtnPadding = New("UIPadding", {
                 PaddingLeft = UDim.new(0, 15),
@@ -8055,7 +7955,7 @@ function Library:CreateWindow(WindowInfo)
                     ZIndex = 2,
                     Parent = TextBtn,
                 })
-                New("UICorner", { CornerRadius = UDim.new(0, 2), Parent = ProgressBar })
+                New("UICorner", { CornerRadius = UDim.new(0, Library.CornerRadius), Parent = ProgressBar })
             end
 
             local IsActive = WaitTime <= 0
