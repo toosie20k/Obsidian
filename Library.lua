@@ -170,8 +170,8 @@ local Library = {
     ActiveDialog = nil,
 
     ToggleKeybind = Enum.KeyCode.RightControl,
-    TweenInfo = TweenInfo.new(0.22, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
-    NotifyTweenInfo = TweenInfo.new(0.38, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+    TweenInfo = TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+    NotifyTweenInfo = TweenInfo.new(0.32, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 
     Toggled = false,
     Unloaded = false,
@@ -195,24 +195,24 @@ local Library = {
     OriginalMinSize = Vector2.new(480, 360),
     MinSize = Vector2.new(480, 360),
     DPIScale = 1,
-    CornerRadius = 10,
+    CornerRadius = 12,
 
     IsLightTheme = false,
     Scheme = {
-    -- OnyxLib V2: Unified deep-charcoal palette
-    BackgroundColor = Color3.fromRGB(12, 12, 16),
-    MainColor = Color3.fromRGB(22, 22, 22),
-    AccentColor = Color3.fromRGB(100, 80, 240),
-    OutlineColor = Color3.fromRGB(42, 42, 42),
-    FontColor = Color3.fromRGB(225, 225, 240),
+    -- NexusLib V3: Modern neon-glass palette
+    BackgroundColor = Color3.fromRGB(9, 9, 13),
+    MainColor = Color3.fromRGB(16, 16, 22),
+    AccentColor = Color3.fromRGB(80, 200, 255),
+    OutlineColor = Color3.fromRGB(38, 38, 52),
+    FontColor = Color3.fromRGB(220, 228, 255),
     Font = Font.fromEnum(Enum.Font.GothamBold),
 
     RedColor = Color3.fromRGB(255, 65, 95),
     DarkColor = Color3.fromRGB(0, 0, 0),
     WhiteColor = Color3.fromRGB(255, 255, 255),
 
-    SidebarColor = Color3.fromRGB(12, 12, 16),
-    AccentGlow = Color3.fromRGB(200, 200, 220),
+    SidebarColor = Color3.fromRGB(9, 9, 13),
+    AccentGlow = Color3.fromRGB(80, 200, 255),
 },
 
     Registry = {},
@@ -295,7 +295,7 @@ local Templates = {
         Resizable = true,
         SearchbarSize = UDim2.fromScale(1, 1),
         GlobalSearch = false,
-        CornerRadius = 10,
+        CornerRadius = 12,
         NotifySide = "Right",
         ShowCustomCursor = true,
         Font = Enum.Font.GothamBold,
@@ -1124,7 +1124,7 @@ local function ParentUI(UI: Instance, SkipHiddenUI: boolean?)
 end
 
 local ScreenGui = New("ScreenGui", {
-    Name = "OnyxLib",
+    Name = "NexusLib",
     DisplayOrder = 999,
     ResetOnSpawn = false,
 })
@@ -5726,7 +5726,7 @@ function Library:Notify(...)
         Parent = FakeBackground,
     })
     New("UICorner", {
-        CornerRadius = UDim.new(0, Library.CornerRadius),
+        CornerRadius = UDim.new(0, 12),
         Parent = Holder,
     })
     New("UIListLayout", {
@@ -6057,11 +6057,11 @@ function Library:CreateWindow(WindowInfo)
         Library.KeybindFrame.Position = UDim2.new(0, 6, 0.5, 0)
         Library.KeybindFrame.Visible = false
 
-        --// OnyxLib V2 -- unified deep-charcoal window
-        local ONYX_BG  = Color3.fromRGB(15, 15, 15)
-        local ONYX_TOP = Color3.fromRGB(22, 22, 22)
-        local ONYX_ACC = Color3.fromRGB(100, 80, 240)
-        local ONYX_OUT = Color3.fromRGB(42, 42, 42)
+        --// NexusLib V3 -- modern neon-glass dark window
+        local ONYX_BG  = Color3.fromRGB(9, 9, 13)
+        local ONYX_TOP = Color3.fromRGB(14, 14, 20)
+        local ONYX_ACC = Color3.fromRGB(80, 200, 255)
+        local ONYX_OUT = Color3.fromRGB(38, 38, 52)
 
         MainFrame = New("TextButton", {
             BackgroundColor3 = ONYX_BG,
@@ -6082,13 +6082,13 @@ function Library:CreateWindow(WindowInfo)
             ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
             Color = Color3.fromRGB(255, 255, 255),
             Thickness = 1,
-            Transparency = 0.85,
+            Transparency = 0.78,
             Parent = MainFrame,
         })
 
         -- Separator under top bar
         Library:MakeLine(MainFrame, {
-            Position = UDim2.fromOffset(0, 50),
+            Position = UDim2.fromOffset(0, 54),
             Size = UDim2.new(1, 0, 0, 1),
         })
 
@@ -6124,7 +6124,7 @@ function Library:CreateWindow(WindowInfo)
         --// TOP BAR
         local TopBar = New("Frame", {
             BackgroundColor3 = ONYX_TOP,
-            Size = UDim2.new(1, 0, 0, 50),
+            Size = UDim2.new(1, 0, 0, 54),
             Parent = MainFrame,
         })
         New("UICorner", {
@@ -6162,7 +6162,7 @@ function Library:CreateWindow(WindowInfo)
         -- Accent pill brand mark
         local BrandPill = New("Frame", {
             BackgroundColor3 = ONYX_ACC,
-            Size = UDim2.fromOffset(4, 16),
+            Size = UDim2.fromOffset(4, 20),
             Parent = TitleHolder,
         })
         New("UICorner", { CornerRadius = UDim.new(1, 0), Parent = BrandPill })
@@ -6192,8 +6192,8 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(0, X, 1, 0),
             Text = WindowInfo.Title,
-            TextSize = 14,
-            TextColor3 = Color3.fromRGB(225, 225, 240),
+            TextSize = 15,
+            TextColor3 = Color3.fromRGB(220, 228, 255),
             Parent = TitleHolder,
         })
         Library:AddToRegistry(WindowTitle, { TextColor3 = "FontColor" })
@@ -6255,7 +6255,7 @@ function Library:CreateWindow(WindowInfo)
 
         -- Search box
         SearchBox = New("TextBox", {
-            BackgroundColor3 = Color3.fromRGB(20, 20, 26),
+            BackgroundColor3 = Color3.fromRGB(14, 14, 22),
             PlaceholderText = "Search...",
             Size = WindowInfo.SearchbarSize,
             TextScaled = true,
@@ -6310,7 +6310,7 @@ function Library:CreateWindow(WindowInfo)
             AnchorPoint = Vector2.new(0, 1),
             BackgroundColor3 = ONYX_TOP,
             Position = UDim2.fromScale(0, 1),
-            Size = UDim2.new(1, 0, 0, 24),
+            Size = UDim2.new(1, 0, 0, 26),
             Parent = MainFrame,
         })
         New("UICorner", { CornerRadius = UDim.new(0, WindowInfo.CornerRadius), Parent = BottomBackground })
@@ -6321,7 +6321,7 @@ function Library:CreateWindow(WindowInfo)
         })
         Library:MakeLine(MainFrame, {
             AnchorPoint = Vector2.new(0, 1),
-            Position = UDim2.new(0, 0, 1, -24),
+            Position = UDim2.new(0, 0, 1, -26),
             Size = UDim2.new(1, 0, 0, 1),
         })
 
@@ -6329,7 +6329,7 @@ function Library:CreateWindow(WindowInfo)
             AnchorPoint = Vector2.new(0, 1),
             BackgroundTransparency = 1,
             Position = UDim2.fromScale(0, 1),
-            Size = UDim2.new(1, 0, 0, 24),
+            Size = UDim2.new(1, 0, 0, 26),
             Parent = MainFrame,
         })
         New("TextLabel", {
@@ -6337,7 +6337,7 @@ function Library:CreateWindow(WindowInfo)
             Size = UDim2.fromScale(1, 1),
             Text = WindowInfo.Footer,
             TextSize = 12,
-            TextTransparency = 0.65,
+            TextTransparency = 0.55,
             Parent = BottomBar,
         })
 
@@ -6357,18 +6357,18 @@ function Library:CreateWindow(WindowInfo)
         end
         New("ImageLabel", {
             Image = ResizeIcon and ResizeIcon.Url or "",
-            ImageColor3 = "FontColor",
+            ImageColor3 = "AccentColor",
             ImageRectOffset = ResizeIcon and ResizeIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = ResizeIcon and ResizeIcon.ImageRectSize or Vector2.zero,
-            ImageTransparency = 0.6,
+            ImageTransparency = 0.4,
             Position = UDim2.fromOffset(2, 2),
             Size = UDim2.new(1, -4, 1, -4),
             Parent = ResizeButton,
         })
 
-        --// SIDEBAR -- same tone as topbar, NO purple tint
+        --// SIDEBAR -- deep void tone matching bg
         local SidebarBG = New("Frame", {
-            BackgroundColor3 = Color3.fromRGB(14, 14, 18),
+            BackgroundColor3 = Color3.fromRGB(11, 11, 16),
             Position = UDim2.fromOffset(0, 0),
             Size = UDim2.new(0, InitialLeftWidth, 1, 0),
             ZIndex = 0,
@@ -6389,9 +6389,9 @@ function Library:CreateWindow(WindowInfo)
             AutomaticCanvasSize = Enum.AutomaticSize.Y,
             BackgroundTransparency = 1,
             CanvasSize = UDim2.fromScale(0, 0),
-            Position = UDim2.fromOffset(0, 51),
+            Position = UDim2.fromOffset(0, 55),
             ScrollBarThickness = 0,
-            Size = UDim2.new(0, InitialLeftWidth, 1, -75),
+            Size = UDim2.new(0, InitialLeftWidth, 1, -79),
             ZIndex = 1,
             Parent = MainFrame,
         })
@@ -6407,8 +6407,8 @@ function Library:CreateWindow(WindowInfo)
             AnchorPoint = Vector2.new(1, 0),
             BackgroundColor3 = ONYX_BG,
             Name = "Container",
-            Position = UDim2.new(1, 0, 0, 51),
-            Size = UDim2.new(1, -InitialLeftWidth - 1, 1, -75),
+            Position = UDim2.new(1, 0, 0, 55),
+            Size = UDim2.new(1, -InitialLeftWidth - 1, 1, -79),
             Parent = MainFrame,
         })
         Library:AddToRegistry(Container, { BackgroundColor3 = "BackgroundColor" })
@@ -6487,8 +6487,8 @@ function Library:CreateWindow(WindowInfo)
 
         TitleHolder.Size = UDim2.new(0, Width, 1, 0)
         RightWrapper.Size = UDim2.new(1, -Width - 57 - 1, 1, -16)
-        Tabs.Size = UDim2.new(0, Width, 1, -75)
-        Container.Size = UDim2.new(1, -Width - 1, 1, -75)
+        Tabs.Size = UDim2.new(0, Width, 1, -79)
+        Container.Size = UDim2.new(1, -Width - 1, 1, -79)
 
         if WindowInfo.EnableCompacting then
             ApplyCompact()
@@ -6546,20 +6546,20 @@ function Library:CreateWindow(WindowInfo)
             TabButton = New("TextButton", {
                 BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                 BackgroundTransparency = 1,
-                Size = UDim2.new(1, 0, 0, 36),
+                Size = UDim2.new(1, 0, 0, 40),
                 Text = "",
                 ClipsDescendants = false,
                 Parent = Tabs,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 8),
+                CornerRadius = UDim.new(0, 10),
                 Parent = TabButton,
             })
 
             -- Pill highlight — accent color, starts invisible
             TabPill = New("Frame", {
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
+                BackgroundColor3 = Color3.fromRGB(80, 200, 255),
                 BackgroundTransparency = 1,
                 Position = UDim2.fromScale(0.5, 0.5),
                 Size = UDim2.fromScale(1, 1),
@@ -6567,7 +6567,7 @@ function Library:CreateWindow(WindowInfo)
                 Parent = TabButton,
             })
             New("UICorner", {
-                CornerRadius = UDim.new(0, 8),
+                CornerRadius = UDim.new(0, 10),
                 Parent = TabPill,
             })
             Library:AddToRegistry(TabPill, { BackgroundColor3 = "AccentColor" })
@@ -6575,10 +6575,10 @@ function Library:CreateWindow(WindowInfo)
             -- Left accent bar — 3px rounded, fully opaque accent when active
             TabAccentBar = New("Frame", {
                 AnchorPoint = Vector2.new(0, 0.5),
-                BackgroundColor3 = Color3.fromRGB(100, 80, 240),
+                BackgroundColor3 = Color3.fromRGB(80, 200, 255),
                 BackgroundTransparency = 1,
                 Position = UDim2.new(0, 0, 0.5, 0),
-                Size = UDim2.new(0, 3, 0, 18),
+                Size = UDim2.new(0, 3, 0, 20),
                 ZIndex = 3,
                 Parent = TabButton,
             })
@@ -6993,7 +6993,7 @@ function Library:CreateWindow(WindowInfo)
                     Position = UDim2.fromOffset(BoxIcon and 24 or 0, 0),
                     Size = UDim2.new(1, 0, 0, 34),
                     Text = Info.Name,
-                    TextSize = 15,
+                    TextSize = 13,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     Parent = GroupboxHolder,
                 })
@@ -7260,16 +7260,16 @@ function Library:CreateWindow(WindowInfo)
 
         function Tab:Hover(Hovering)
             if Library.ActiveTab == Tab then return end
-            local T = TweenInfo.new(0.16, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+            local T = TweenInfo.new(0.14, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
             TweenService:Create(TabLabel, T, {
-                TextTransparency = Hovering and 0.15 or 0.5,
+                TextTransparency = Hovering and 0.1 or 0.5,
             }):Play()
             TweenService:Create(TabPill, T, {
-                BackgroundTransparency = Hovering and 0.92 or 1,
+                BackgroundTransparency = Hovering and 0.88 or 1,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, T, {
-                    ImageTransparency = Hovering and 0.2 or 0.5,
+                    ImageTransparency = Hovering and 0.15 or 0.5,
                 }):Play()
             end
         end
@@ -7277,20 +7277,20 @@ function Library:CreateWindow(WindowInfo)
         function Tab:Show()
             if Library.ActiveTab then Library.ActiveTab:Hide() end
 
-            local T = TweenInfo.new(0.22, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+            local T = TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
 
             -- Pill: accent fill at low opacity
             TweenService:Create(TabPill, T, {
-                BackgroundTransparency = 0.93,
+                BackgroundTransparency = 0.90,
             }):Play()
             -- Accent bar: fully opaque
             TweenService:Create(TabAccentBar, T, {
                 BackgroundTransparency = 0,
             }):Play()
-            -- Label: fully visible, accent color
+            -- Label: fully visible, new font color
             TweenService:Create(TabLabel, T, {
                 TextTransparency = 0,
-                TextColor3 = Color3.fromRGB(225, 225, 240),
+                TextColor3 = Color3.fromRGB(220, 228, 255),
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, T, { ImageTransparency = 0 }):Play()
@@ -7306,7 +7306,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         function Tab:Hide()
-            local T = TweenInfo.new(0.18, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+            local T = TweenInfo.new(0.14, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
 
             TweenService:Create(TabPill, T, { BackgroundTransparency = 1 }):Play()
             TweenService:Create(TabAccentBar, T, { BackgroundTransparency = 1 }):Play()
