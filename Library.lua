@@ -1,4 +1,3 @@
-
 local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
@@ -200,19 +199,20 @@ local Library = {
 
     IsLightTheme = false,
     Scheme = {
-    BackgroundColor = Color3.fromRGB(10, 10, 10),
-    MainColor = Color3.fromRGB(15, 15, 15),
-    AccentColor = Color3.fromRGB(0, 85, 255),
-    OutlineColor = Color3.fromRGB(25, 25, 25),
-    FontColor = Color3.fromRGB(150, 150, 150),
-    Font = Font.fromEnum(Enum.Font.GothamMedium),
+    -- OnyxLib V2: Unified deep-charcoal palette
+    BackgroundColor = Color3.fromRGB(12, 12, 16),
+    MainColor = Color3.fromRGB(22, 22, 22),
+    AccentColor = Color3.fromRGB(100, 80, 240),
+    OutlineColor = Color3.fromRGB(42, 42, 42),
+    FontColor = Color3.fromRGB(225, 225, 240),
+    Font = Font.fromEnum(Enum.Font.GothamBold),
 
-    RedColor = Color3.fromRGB(170, 0, 0),
+    RedColor = Color3.fromRGB(255, 65, 95),
     DarkColor = Color3.fromRGB(0, 0, 0),
     WhiteColor = Color3.fromRGB(255, 255, 255),
 
-    SidebarColor = Color3.fromRGB(10, 10, 10),
-    AccentGlow = Color3.fromRGB(0, 85, 255),
+    SidebarColor = Color3.fromRGB(12, 12, 16),
+    AccentGlow = Color3.fromRGB(200, 200, 220),
 },
 
     Registry = {},
@@ -6366,13 +6366,12 @@ function Library:CreateWindow(WindowInfo)
             Parent = ResizeButton,
         })
 
-        --// SIDEBAR -- HIDDEN FOR INTELLECTUAL LAYOUT
+        --// SIDEBAR -- same tone as topbar, NO purple tint
         local SidebarBG = New("Frame", {
             BackgroundColor3 = Color3.fromRGB(14, 14, 18),
             Position = UDim2.fromOffset(0, 0),
-            Size = UDim2.new(0, 0, 1, 0),
+            Size = UDim2.new(0, InitialLeftWidth, 1, 0),
             ZIndex = 0,
-            Visible = false,
             Parent = MainFrame,
         })
         New("UICorner", { CornerRadius = UDim.new(0, WindowInfo.CornerRadius), Parent = SidebarBG })
@@ -6382,38 +6381,25 @@ function Library:CreateWindow(WindowInfo)
             Position = UDim2.fromScale(1, 0),
             Size = UDim2.new(0, WindowInfo.CornerRadius, 1, 0),
             ZIndex = 0,
-            Visible = false,
             Parent = SidebarBG,
         })
 
         --// TABS scrollframe
         Tabs = New("ScrollingFrame", {
-            AutomaticCanvasSize = Enum.AutomaticSize.X,
-            ScrollingDirection = Enum.ScrollingDirection.X,
+            AutomaticCanvasSize = Enum.AutomaticSize.Y,
             BackgroundTransparency = 1,
             CanvasSize = UDim2.fromScale(0, 0),
             Position = UDim2.fromOffset(0, 51),
             ScrollBarThickness = 0,
-            Size = UDim2.new(1, 0, 0, 40),
+            Size = UDim2.new(0, InitialLeftWidth, 1, -75),
             ZIndex = 1,
             Parent = MainFrame,
         })
-        New("UIListLayout", { 
-            FillDirection = Enum.FillDirection.Horizontal, 
-            VerticalAlignment = Enum.VerticalAlignment.Center,
-            Padding = UDim.new(0, 16), 
-            Parent = Tabs 
-        })
+        New("UIListLayout", { Padding = UDim.new(0, 3), Parent = Tabs })
         New("UIPadding", {
-            PaddingTop = UDim.new(0, 0), PaddingBottom = UDim.new(0, 0),
-            PaddingLeft = UDim.new(0, 16), PaddingRight = UDim.new(0, 16),
+            PaddingTop = UDim.new(0, 8), PaddingBottom = UDim.new(0, 8),
+            PaddingLeft = UDim.new(0, 8), PaddingRight = UDim.new(0, 8),
             Parent = Tabs,
-        })
-
-        -- Sidebar divider (hidden dummy to satisfy references)
-        DividerLine = New("Frame", {
-            Visible = false,
-            Parent = MainFrame,
         })
 
         --// CONTENT CONTAINER
@@ -6421,14 +6407,14 @@ function Library:CreateWindow(WindowInfo)
             AnchorPoint = Vector2.new(1, 0),
             BackgroundColor3 = ONYX_BG,
             Name = "Container",
-            Position = UDim2.new(1, 0, 0, 91),
-            Size = UDim2.new(1, 0, 1, -115),
+            Position = UDim2.new(1, 0, 0, 51),
+            Size = UDim2.new(1, -InitialLeftWidth - 1, 1, -75),
             Parent = MainFrame,
         })
         Library:AddToRegistry(Container, { BackgroundColor3 = "BackgroundColor" })
         New("UIPadding", {
-            PaddingBottom = UDim.new(0, 6), PaddingLeft = UDim.new(0, 6),
-            PaddingRight = UDim.new(0, 6), PaddingTop = UDim.new(0, 6),
+            PaddingBottom = UDim.new(0, 0), PaddingLeft = UDim.new(0, 6),
+            PaddingRight = UDim.new(0, 6), PaddingTop = UDim.new(0, 0),
             Parent = Container,
         })
     end
@@ -6551,7 +6537,6 @@ function Library:CreateWindow(WindowInfo)
         local TabContainer
         local TabLeft
         local TabRight
-        local TabMiddle
 
         Icon = Library:GetCustomIcon(Icon)
         local TabPill = nil
@@ -6561,8 +6546,7 @@ function Library:CreateWindow(WindowInfo)
             TabButton = New("TextButton", {
                 BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                 BackgroundTransparency = 1,
-                Size = UDim2.new(0, 0, 1, 0),
-                AutomaticSize = Enum.AutomaticSize.X,
+                Size = UDim2.new(1, 0, 0, 36),
                 Text = "",
                 ClipsDescendants = false,
                 Parent = Tabs,
@@ -6572,14 +6556,13 @@ function Library:CreateWindow(WindowInfo)
                 Parent = TabButton,
             })
 
-            -- Pill highlight (Hidden for INTellectual)
+            -- Pill highlight — accent color, starts invisible
             TabPill = New("Frame", {
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 BackgroundColor3 = Color3.fromRGB(100, 80, 240),
                 BackgroundTransparency = 1,
                 Position = UDim2.fromScale(0.5, 0.5),
                 Size = UDim2.fromScale(1, 1),
-                Visible = false,
                 ZIndex = 0,
                 Parent = TabButton,
             })
@@ -6589,13 +6572,13 @@ function Library:CreateWindow(WindowInfo)
             })
             Library:AddToRegistry(TabPill, { BackgroundColor3 = "AccentColor" })
 
-            -- Bottom accent bar 
+            -- Left accent bar — 3px rounded, fully opaque accent when active
             TabAccentBar = New("Frame", {
-                AnchorPoint = Vector2.new(0.5, 1),
+                AnchorPoint = Vector2.new(0, 0.5),
                 BackgroundColor3 = Color3.fromRGB(100, 80, 240),
                 BackgroundTransparency = 1,
-                Position = UDim2.new(0.5, 0, 1, 2),
-                Size = UDim2.new(1, 0, 0, 2),
+                Position = UDim2.new(0, 0, 0.5, 0),
+                Size = UDim2.new(0, 3, 0, 18),
                 ZIndex = 3,
                 Parent = TabButton,
             })
@@ -6653,8 +6636,8 @@ function Library:CreateWindow(WindowInfo)
                 Text = Name,
                 TextSize = 13,
                 TextTransparency = 0.5,
-                TextXAlignment = Enum.TextXAlignment.Center,
-                Visible = true,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                Visible = not IsCompact,
                 ZIndex = 1,
                 Parent = ButtonContent,
             })
@@ -6682,33 +6665,31 @@ function Library:CreateWindow(WindowInfo)
                 CanvasSize = UDim2.fromScale(0, 0),
                 ScrollBarImageTransparency = 1,
                 ScrollBarThickness = 0,
-                Size = UDim2.new(0.333, -4, 1, 0),
-                Position = UDim2.fromScale(0, 0),
+                Size = UDim2.new(0.5, -3, 1, 0),
                 Parent = TabContainer,
             })
-            New("UIListLayout", { Padding = UDim.new(0, 2), Parent = TabLeft })
-            New("UIPadding", { PaddingBottom = UDim.new(0, 2), PaddingLeft = UDim.new(0, 2), PaddingRight = UDim.new(0, 2), PaddingTop = UDim.new(0, 2), Parent = TabLeft })
-            do
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = -1, Parent = TabLeft })
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = 1, Parent = TabLeft })
-            end
-
-            TabMiddle = New("ScrollingFrame", {
-                AutomaticCanvasSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
-                CanvasSize = UDim2.fromScale(0, 0),
-                ScrollBarImageTransparency = 1,
-                ScrollBarThickness = 0,
-                AnchorPoint = Vector2.new(0.5, 0),
-                Position = UDim2.fromScale(0.5, 0),
-                Size = UDim2.new(0.333, -4, 1, 0),
-                Parent = TabContainer,
+            New("UIListLayout", {
+                Padding = UDim.new(0, 2),
+                Parent = TabLeft,
             })
-            New("UIListLayout", { Padding = UDim.new(0, 2), Parent = TabMiddle })
-            New("UIPadding", { PaddingBottom = UDim.new(0, 2), PaddingLeft = UDim.new(0, 2), PaddingRight = UDim.new(0, 2), PaddingTop = UDim.new(0, 2), Parent = TabMiddle })
+            New("UIPadding", {
+                PaddingBottom = UDim.new(0, 2),
+                PaddingLeft = UDim.new(0, 2),
+                PaddingRight = UDim.new(0, 2),
+                PaddingTop = UDim.new(0, 2),
+                Parent = TabLeft,
+            })
             do
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = -1, Parent = TabMiddle })
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = 1, Parent = TabMiddle })
+                New("Frame", {
+                    BackgroundTransparency = 1,
+                    LayoutOrder = -1,
+                    Parent = TabLeft,
+                })
+                New("Frame", {
+                    BackgroundTransparency = 1,
+                    LayoutOrder = 1,
+                    Parent = TabLeft,
+                })
             end
 
             TabRight = New("ScrollingFrame", {
@@ -6719,14 +6700,31 @@ function Library:CreateWindow(WindowInfo)
                 Position = UDim2.fromScale(1, 0),
                 ScrollBarImageTransparency = 1,
                 ScrollBarThickness = 0,
-                Size = UDim2.new(0.333, -4, 1, 0),
+                Size = UDim2.new(0.5, -3, 1, 0),
                 Parent = TabContainer,
             })
-            New("UIListLayout", { Padding = UDim.new(0, 2), Parent = TabRight })
-            New("UIPadding", { PaddingBottom = UDim.new(0, 2), PaddingLeft = UDim.new(0, 2), PaddingRight = UDim.new(0, 2), PaddingTop = UDim.new(0, 2), Parent = TabRight })
+            New("UIListLayout", {
+                Padding = UDim.new(0, 2),
+                Parent = TabRight,
+            })
+            New("UIPadding", {
+                PaddingBottom = UDim.new(0, 2),
+                PaddingLeft = UDim.new(0, 2),
+                PaddingRight = UDim.new(0, 2),
+                PaddingTop = UDim.new(0, 2),
+                Parent = TabRight,
+            })
             do
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = -1, Parent = TabRight })
-                New("Frame", { BackgroundTransparency = 1, LayoutOrder = 1, Parent = TabRight })
+                New("Frame", {
+                    BackgroundTransparency = 1,
+                    LayoutOrder = -1,
+                    Parent = TabRight,
+                })
+                New("Frame", {
+                    BackgroundTransparency = 1,
+                    LayoutOrder = 1,
+                    Parent = TabRight,
+                })
             end
         end
 
@@ -6942,7 +6940,7 @@ function Library:CreateWindow(WindowInfo)
                 AutomaticSize = Enum.AutomaticSize.Y,
                 BackgroundTransparency = 1,
                 Size = UDim2.fromScale(1, 0),
-                Parent = (Info.Side == 1 and TabLeft) or (Info.Side == 2 and TabRight) or TabMiddle,
+                Parent = Info.Side == 1 and TabLeft or TabRight,
             })
             New("UIListLayout", {
                 Padding = UDim.new(0, 6),
@@ -6962,7 +6960,7 @@ function Library:CreateWindow(WindowInfo)
 
             do
                 GroupboxHolder = New("Frame", {
-                    BackgroundTransparency = 1,
+                    BackgroundColor3 = "BackgroundColor",
                     Size = UDim2.fromScale(1, 0),
                     Parent = BoxHolder,
                 })
@@ -6971,6 +6969,11 @@ function Library:CreateWindow(WindowInfo)
                     Parent = GroupboxHolder,
                 })
                 Library:AddOutline(GroupboxHolder)
+
+                Library:MakeLine(GroupboxHolder, {
+                    Position = UDim2.fromOffset(0, 34),
+                    Size = UDim2.new(1, 0, 0, 1),
+                })
 
                 local BoxIcon = Library:GetCustomIcon(Info.IconName)
                 if BoxIcon then
@@ -6989,11 +6992,9 @@ function Library:CreateWindow(WindowInfo)
                     BackgroundTransparency = 1,
                     Position = UDim2.fromOffset(BoxIcon and 24 or 0, 0),
                     Size = UDim2.new(1, 0, 0, 34),
-                    Text = "___  " .. Info.Name .. "  ___",
-                    TextSize = 12,
-                    TextColor3 = Color3.fromRGB(225, 225, 240),
-                    TextTransparency = 0.5,
-                    TextXAlignment = Enum.TextXAlignment.Center,
+                    Text = Info.Name,
+                    TextSize = 15,
+                    TextXAlignment = Enum.TextXAlignment.Left,
                     Parent = GroupboxHolder,
                 })
                 New("UIPadding", {
@@ -7050,10 +7051,6 @@ function Library:CreateWindow(WindowInfo)
 
         function Tab:AddRightGroupbox(Name, IconName)
             return Tab:AddGroupbox({ Side = 2, Name = Name, IconName = IconName })
-        end
-
-        function Tab:AddMiddleGroupbox(Name, IconName)
-            return Tab:AddGroupbox({ Side = 3, Name = Name, IconName = IconName })
         end
 
         function Tab:AddTabbox(Info)
