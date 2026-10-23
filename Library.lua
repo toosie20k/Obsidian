@@ -1003,12 +1003,7 @@ end
 
 local function IsCustomAssetIcon(Icon: string, IncludeAssetId: boolean)
     return typeof(Icon) == "string"
-        and (
-            Icon:match("^content://")
-            or Icon:match("^rbxasset://%x+/")
-            or Icon:match("^rbxasset://[^/]+/")
-            or (IncludeAssetId == true and Icon:match("^rbxassetid://"))
-        )
+        and (Icon:match("^content://") or (Icon:match("^rbxasset://%x+/") or Icon:match("^rbxasset://[^/]+/")) or (IncludeAssetId == true and Icon:match("^rbxassetid://")))
 end
 
 type Icon = {
@@ -2144,9 +2139,7 @@ local OnlineFetchIcons, OnlineIcons = pcall(function()
 end)
 do
     if OnlineFetchIcons and OnlineIcons then
-        pcall(function()
-            OnlineIcons.SetProvider("lucide")
-        end)
+        OnlineIcons.SetProvider("lucide")
         Library:SetIconModule(OnlineIcons)
     else
         OnlineFetchIcons, OnlineIcons = pcall(function()
@@ -6341,13 +6334,14 @@ function Library:CreateWindow(WindowInfo)
         Library:AddToRegistry(BrandPill, { BackgroundColor3 = "AccentColor" })
 
         if WindowInfo.Icon then
+            local WindowIconData = Library:GetCustomIcon(WindowInfo.Icon)
             WindowIcon = New("ImageLabel", {
-                Image = if tonumber(WindowInfo.Icon)
-                    then string.format("rbxassetid://%d", WindowInfo.Icon)
-                    else WindowInfo.Icon,
                 Size = WindowInfo.IconSize,
                 Parent = TitleHolder,
             })
+            if WindowIconData then
+                Library:ApplyLucideIcon(WindowIcon, WindowIconData)
+            end
         else
             WindowIcon = New("TextLabel", {
                 BackgroundTransparency = 1,
