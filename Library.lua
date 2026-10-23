@@ -998,7 +998,17 @@ end
 
 function IsValidCustomIcon(Icon: string)
     return typeof(Icon) == "string"
-        and (Icon:match("rbxasset") or Icon:match("roblox%.com/asset/%?id=") or Icon:match("rbxthumb://type="))
+        and (Icon:match("^rbxasset://textures/") or Icon:match("roblox%.com/asset/%?id=") or Icon:match("rbxthumb://type="))
+end
+
+local function IsCustomAssetIcon(Icon: string, IncludeAssetId: boolean)
+    return typeof(Icon) == "string"
+        and (
+            Icon:match("^content://")
+            or Icon:match("^rbxasset://%x+/")
+            or Icon:match("^rbxasset://[^/]+/")
+            or (IncludeAssetId == true and Icon:match("^rbxassetid://"))
+        )
 end
 
 type Icon = {
@@ -1055,11 +1065,18 @@ function Library:GetCustomIcon(IconName: string): any
         IconName = string.format("rbxassetid://%s", tostring(IconName))
     end
 
-    if IsValidCustomIcon(IconName) then
+    if IsCustomAssetIcon(IconName, true) then
         return {
             Url = IconName,
             ImageRectOffset = Vector2.zero,
             ImageRectSize = Vector2.zero,
+        }
+    elseif IsValidCustomIcon(IconName) then
+        return {
+            Url = IconName,
+            ImageRectOffset = Vector2.zero,
+            ImageRectSize = Vector2.zero,
+            Custom = true,
         }
     end
 
@@ -2122,11 +2139,26 @@ end
 
 local OnlineFetchIcons, OnlineIcons = pcall(function()
     return (loadstring(
-        game:HttpGet("https://raw.githubusercontent.com/notpoiu/lucide-roblox-direct/refs/heads/main/source.lua")
+        game:HttpGet("https://raw.githubusercontent.com/notpoiu/Molto/refs/heads/main/source.lua")
     ) :: () -> IconModule)()
 end)
-if OnlineFetchIcons and OnlineIcons then
-    Library:SetIconModule(OnlineIcons)
+do
+    if OnlineFetchIcons and OnlineIcons then
+        pcall(function()
+            OnlineIcons.SetProvider("lucide")
+        end)
+        Library:SetIconModule(OnlineIcons)
+    else
+        OnlineFetchIcons, OnlineIcons = pcall(function()
+            return (loadstring(
+                game:HttpGet("https://raw.githubusercontent.com/notpoiu/lucide-roblox-direct/refs/heads/main/source.lua")
+            ) :: () -> IconModule)()
+        end)
+
+        if OnlineFetchIcons and OnlineIcons then
+            Library:SetIconModule(OnlineIcons)
+        end
+    end
 end
 
 local BaseAddons = {}
