@@ -6775,8 +6775,7 @@ function Library:CreateWindow(WindowInfo)
                     ImageRectSize = Icon.ImageRectSize,
                     ImageTransparency = 0.5,
                     ScaleType = Enum.ScaleType.Fit,
-                    Size = UDim2.fromOffset(0, 16),
-                    SizeConstraint = Enum.SizeConstraint.RelativeYY,
+                    Size = UDim2.fromOffset(16, 16),
                     ZIndex = 1,
                     Parent = ButtonContent,
                 })
